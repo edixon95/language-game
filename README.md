@@ -7,10 +7,10 @@ This project came to mind from playing around with CSS animations and creating a
 This project uses Zustand to keep logic together and Jest for unit testing to make sure I don't accidentally add content that can't be accessed
 
 Stack:
-Vite React
-TypeScript
-Jest
-Zustand
+  - Vite React
+  - TypeScript
+  - Jest
+  - Zustand
 
 To come:
   - Basic UI art
