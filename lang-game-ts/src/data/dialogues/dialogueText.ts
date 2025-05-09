@@ -1,0 +1,29 @@
+import type { DialogueNode } from "../../types/index"
+
+export const dialogueText: DialogueNode[] = [
+    {
+        id: 1,
+        meaning: "Hello",
+        text: [8], // WordId
+        choices: [1] // DialogueOptionId
+    },
+    {
+        id: 2,
+        meaning: "Yes?",
+        text: [9, 6], // Question:Yes
+        choices: [2, 3] 
+    },
+    {
+        id: 3,
+        meaning: "You? Me?",
+        text: [9, 3, 9, 4], // Question:You:Question:Me
+        choices: [4, 5]
+    },
+    {
+        id: 4,
+        meaning: "Yes?",
+        text: [9, 6],
+        choices: [6] // End Testing Node
+    },
+    
+]
