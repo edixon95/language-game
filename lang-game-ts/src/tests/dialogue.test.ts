@@ -2,6 +2,7 @@ import { dialogueText } from '../data/dialogues/dialogueText';
 import { dialogueOptions } from '../data/dialogues/dialogueOptions';
 import { words } from '../data/words/words';
 import { evidenceOptions } from '../data/evidence/evidenceOptions';
+import { puzzleOptions } from '../data/puzzle/puzzleOptions';
 
 describe('Dialogue System', () => {
     it('All dialogueOptions have a nextNode', () => {
@@ -36,7 +37,7 @@ describe('Dialogue System', () => {
         const allNodesReached = new Set();
 
         dialogueOptions.forEach((node) => {
-            allNodesReached.add(node.nextNode)
+            allNodesReached.add(node.nextNode);
         });
 
         // First node is skipped as it's not reachable through the trees
@@ -60,11 +61,58 @@ describe('Dialogue System', () => {
 
     });
 
-    it('All words are used in dialogueText and dialogueOptions', () => {
+    it('All evidence is reachable from dialogueTexts and puzzleOptions', () => {
+        const allNodesReached = new Set();
+
+        dialogueText.forEach((node) => {
+            if (node.evidence && node.evidence.length > 0) {
+                node.evidence.forEach((evidenceId) => {
+                    allNodesReached.add(evidenceId);
+                });
+            };
+        });
+
+        puzzleOptions.forEach((node) => {
+            if (node.evidence && node.evidence.length > 0) {
+                node.evidence.forEach((evidenceId) => {
+                    allNodesReached.add(evidenceId);
+                });
+            };
+        });
+
+        const unreachableIds = evidenceOptions.map(x => x.id).filter(id => !allNodesReached.has(id));
+
+        expect(unreachableIds).toEqual([]);
+    });
+
+    it('All puzzles are reachable', () => {
+        const allNodesReached = new Set();
+
+        evidenceOptions.forEach(node => {
+            if (node.puzzle) {
+                allNodesReached.add(node.puzzle);
+            }
+        });
+
+        const unreachableIds = puzzleOptions.map(x => x.id).filter(id => !allNodesReached.has(id));
+
+        expect(unreachableIds).toEqual([]);
+    });
+
+    it('All evidence that has a meaning or text must have both', () => {
+        evidenceOptions.forEach((node) => {
+            const hasMeaning = node.meaning !== undefined && node.meaning !== "";
+            const hasText = Array.isArray(node.text) && node.text.length > 0;
+
+            if (hasMeaning || hasText) {
+                expect(hasMeaning && hasText).toBeTruthy();
+            }
+        });
+    });
+
+    it('All words are used in dialogueText, evidenceOptions and puzzleOptions', () => {
         const allWordsUsed = new Set();
 
-
-        // Words are only found through evidence, puzzles and NPC dialogue (dialogueNode)
         dialogueText.forEach(node => {
             node.text.forEach(wordId => {
                 allWordsUsed.add(wordId);
@@ -78,9 +126,17 @@ describe('Dialogue System', () => {
                 });
             }
         })
+
+        puzzleOptions.forEach(node => {
+            if (node.text && node.text.length > 0) {
+                node.text.forEach(wordId => {
+                    allWordsUsed.add(wordId)
+                })
+            }
+        })
         // TODO - Add evidence words
 
-        const unreachableIds = words.map(x => x.id).filter(id => !allWordsUsed.has(id))
+        const unreachableIds = words.map(x => x.id).filter(id => !allWordsUsed.has(id));
 
         expect(unreachableIds).toEqual([]);
     });

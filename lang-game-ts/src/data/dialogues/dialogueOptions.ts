@@ -11,7 +11,7 @@ export const dialogueOptions: DialogueOption[] = [
         id: 2,
         meaning: "Home?",
         text: [9, 5],
-        nextNode: 3
+        nextNode: 3,
     },
     {
         id: 3,
