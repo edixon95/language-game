@@ -32,18 +32,18 @@ To come:
 	- Confirm all words are seen at least once through a dialogueOption (to include evidence and puzzles)
 
 # Change log:
-10/07/225:
+- 10/07/225:
 	- Update tests, not really sure what those original ones were trying to accomplish
 	- Add the last tests for dialogueTrees (TODO: Add evidence and puzzles to the tests once added)
 
-09/07/2025:
+- 09/07/2025:
 	- Added Zustand to keep logic contained and easily accessible if the project grows
 	- Added Jest for testing to make sure the game remains playable after adding content
 
-08/07/2025:
+- 08/07/2025:
 	- Created system logic for handling dialogue trees, found words and verifying choices
 
-07/05/2025:
+- 07/05/2025:
 	- Started project
 	- Temporary pictures, words, dialogue trees
   
