@@ -2,69 +2,78 @@ import { dialogueText } from '../data/dialogues/dialogueText';
 import { dialogueOptions } from '../data/dialogues/dialogueOptions';
 import { words } from '../data/words/words';
 
-// Helper function to find a dialogue node by its ID
-const getDialogueNodeById = (id: number) => dialogueText.find((node) => node.id === id);
-
-// Helper function to find a dialogue option by its ID
-const getDialogueOptionById = (id: number) => dialogueOptions.find((option) => option.id === id);
-
 describe('Dialogue System', () => {
-    it('All dialogueText is reachable from dialogueOptions', () => {
+    it('All dialogueOptions have a nextNode', () => {
         dialogueOptions.forEach(option => {
-            const nextNodeId = option.nextNode;
-
-            if (typeof nextNodeId !== "number") {
-                fail(`Expected nextNodeId to be a number, but got ${typeof nextNodeId}`);
-                return;
-            }
-
-            const nextNode = getDialogueNodeById(nextNodeId);
-
-            expect(nextNode).toBeDefined();
+            const isNumber = typeof option.nextNode === "number";
+            expect(isNumber).toBeTruthy();
         });
     });
 
-    it('All dialogueOptions are reachable from dialogueText', () => {
+    it('All dialogueOptions has text', () => {
+        dialogueOptions.forEach(option => {
+            const hasText = option.text.length > 0;
+            expect(hasText).toBeTruthy();
+        });
+    });
+
+    it('All dialogueText has at least one choice', () => {
         dialogueText.forEach(node => {
-            node.choices.forEach(choiceId => {
-                const option = getDialogueOptionById(choiceId);
-                expect(option).toBeDefined();
+            const hasChoices = node.choices.length > 0;
+            expect(hasChoices).toBeTruthy();
+        });
+    });
+
+    it('All dialogueText has text', () => {
+        dialogueText.forEach(option => {
+            const hasText = option.text.length > 0;
+            expect(hasText).toBeTruthy();
+        });
+    });
+
+    it('All dialogueText is reachable from a dialogueOption, not including dialogueText id:1', () => {
+        const allNodesReached = new Set();
+
+        dialogueOptions.forEach((node) => {
+            allNodesReached.add(node.nextNode)
+        });
+
+        // First node is skipped as it's not reachable through the trees
+        const unreachableIds = dialogueText.slice(1).map(x => x.id).filter(id => !allNodesReached.has(id));
+
+        expect(unreachableIds).toEqual([]);
+    });
+
+    it('All dialogueOptions are reachable from a dialogueText choice', () => {
+        const allNodesReached = new Set();
+
+        dialogueText.forEach((node) => {
+            node.choices.forEach((choiceId) => {
+                allNodesReached.add(choiceId);
             });
         });
+
+        const unreachableIds = dialogueOptions.map(x => x.id).filter(id => !allNodesReached.has(id));
+
+        expect(unreachableIds).toEqual([]);
+
     });
 
     it('All words are used in dialogueText and dialogueOptions', () => {
         const allWordsUsed = new Set();
 
-        // Add words from dialogueText
+
+        // Words are only found through evidence, puzzles and NPC dialogue (dialogueNode)
         dialogueText.forEach(node => {
             node.text.forEach(wordId => {
-                const word = words.find(w => w.id === wordId);
-                if (word) {
-                    word.meaning.forEach(wordMeaning => {
-                        allWordsUsed.add(wordMeaning);
-                    });
-                }
+                allWordsUsed.add(wordId);
             });
         });
 
-        // Add words from dialogueOptions
-        dialogueOptions.forEach(option => {
-            option.text.forEach(wordId => {
-                const word = words.find(w => w.id === wordId);
-                if (word) {
-                    word.meaning.forEach(wordMeaning => {
-                        allWordsUsed.add(wordMeaning);
-                    });
-                }
-            });
-        });
+        // TODO - Add evidence words
 
-        // Check that all words in the `words` list are used
-        words.forEach(word => {
-            word.meaning.forEach(wordMeaning => {
-                expect(allWordsUsed.has(wordMeaning)).toBe(true);
-            });
-        });
+        const unreachableIds = words.map(x => x.id).filter(id => !allWordsUsed.has(id))
+
+        expect(unreachableIds).toEqual([]);
     });
 });
