@@ -1,6 +1,7 @@
 import { dialogueText } from '../data/dialogues/dialogueText';
 import { dialogueOptions } from '../data/dialogues/dialogueOptions';
 import { words } from '../data/words/words';
+import { evidenceOptions } from '../data/evidence/evidenceOptions';
 
 describe('Dialogue System', () => {
     it('All dialogueOptions have a nextNode', () => {
@@ -70,6 +71,13 @@ describe('Dialogue System', () => {
             });
         });
 
+        evidenceOptions.forEach(node => {
+            if (node.text && node.text.length > 0) {
+                node.text.forEach(wordId => {
+                    allWordsUsed.add(wordId);
+                });
+            }
+        })
         // TODO - Add evidence words
 
         const unreachableIds = words.map(x => x.id).filter(id => !allWordsUsed.has(id))

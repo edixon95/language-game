@@ -22,7 +22,7 @@ export const dialogueText: DialogueNode[] = [
     { // This is just forcing the test to pass
         id: 4,
         meaning: "Yes?",
-        text: [9, 6, 1, 2, 5, 7], 
+        text: [9, 6, 1, 2, 5], 
         choices: [6] // End Testing Node
     },
     
