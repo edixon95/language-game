@@ -35,6 +35,7 @@ This project uses Zustand to keep logic together and Jest for unit testing to ma
 - 10/07/225:
 	- Update tests, not really sure what those original ones were trying to accomplish
 	- Add the last tests for dialogueTrees (TODO: Add evidence and puzzles to the tests once added)
+	- Add evidence + Test
 
 - 09/07/2025:
 	- Added Zustand to keep logic contained and easily accessible if the project grows

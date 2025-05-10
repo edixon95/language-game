@@ -34,7 +34,7 @@ export const dialogueOptions: DialogueOption[] = [
     { // This is just forcing the test to pass 
         id: 6,
         meaning: "TO USE ALL WORDS",
-        text: [1, 2, 6, 7],
+        text: [1, 2, 6],
         nextNode: 4// Testing Node End
     },
 ]
