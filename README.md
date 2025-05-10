@@ -6,13 +6,13 @@ This project came to mind from playing around with CSS animations and creating a
 
 This project uses Zustand to keep logic together and Jest for unit testing to make sure I don't accidentally add content that can't be accessed
 
-Stack:
+- Stack:
 	- Vite React
 	- TypeScript
 	- Jest
 	- Zustand
 
-To come:
+- To come:
 	- Basic UI art
 	- Replace human words with language symbols
 	- Add space for the player to write their interpretation about each symbol
