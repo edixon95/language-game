@@ -7,7 +7,7 @@ export type Evidence =
         image?: string;
         isFound?: boolean; // If can show in evidence menu
         isViewed?: boolean; // If player has viewed yet to determine if can show words
-        puzzleId?: number; // puzzleId
+        puzzle?: number; // puzzleId
     }
     | {
         id: number;
@@ -16,7 +16,7 @@ export type Evidence =
         image?: string;
         isFound?: boolean;
         isViewed?: boolean;
-        puzzleId?: number;
+        puzzle?: number;
     };
 
 export interface Puzzle {
@@ -25,5 +25,5 @@ export interface Puzzle {
     text?: number[]; // wordId
     image?: string;
     isSolved?: boolean;
-    evidence: number[]
+    evidence?: number[]
 }

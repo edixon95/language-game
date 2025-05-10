@@ -2,7 +2,7 @@
 
 Hi welcome to my project. I'll add documentation here to explain everything but as a general overview;
 
-This project came to mind from playing around with CSS animations and creating a cool little crt monitor effect, the effect was cool and so: here it is, the idea that came from it.
+This project came to mind from playing around with CSS animations and creating a cool little crt monitor effect so here it is, the idea that came from it.
 
 This project uses Zustand to keep logic together and Jest for unit testing to make sure I don't accidentally add content that can't be accessed
 
@@ -23,19 +23,22 @@ This project uses Zustand to keep logic together and Jest for unit testing to ma
 	- Music? Maybe
 
 # Tests
-- Dialogue
+- Dialogue (and dialogue related)
 	- Confirm all dialogueOptions have a "nextNode"
 	- Confirm both dialogueOptions and dialogueText has "text"
 	- Confirm all dialogueText has at least one choice (choices lead to the next dialogueOption)
 	- Confirm all dialogueTexts are reachable from a dialogueOption
 	- Confirm all dialogueOptions are reachable from a dialogueText
-	- Confirm all words are seen at least once through a dialogueOption (to include evidence and puzzles)
+	- Confirm all words are seen at least once through a dialogueOption, evidence or puzzle
+	- Confirm all evidence, if containing a meaning or text(s), contains both
+	- Confirm all evidence is reachable
+	- Confirm all puzzles are reachable
 
 # Change log:
 - 10/07/225:
 	- Update tests, not really sure what those original ones were trying to accomplish
 	- Add the last tests for dialogueTrees (TODO: Add evidence and puzzles to the tests once added)
-	- Add evidence + Test
+	- Add evidence, add puzzles, add testing. This should be all dialogue specific testing
 
 - 09/07/2025:
 	- Added Zustand to keep logic contained and easily accessible if the project grows
@@ -47,4 +50,3 @@ This project uses Zustand to keep logic together and Jest for unit testing to ma
 - 07/05/2025:
 	- Started project
 	- Temporary pictures, words, dialogue trees
-  
