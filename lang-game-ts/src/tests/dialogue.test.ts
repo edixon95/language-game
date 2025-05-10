@@ -111,18 +111,18 @@ describe('Dialogue System', () => {
     });
 
     it('All words are used in dialogueText, evidenceOptions and puzzleOptions', () => {
-        const allWordsUsed = new Set();
+        const allNodesReached = new Set();
 
         dialogueText.forEach(node => {
             node.text.forEach(wordId => {
-                allWordsUsed.add(wordId);
+                allNodesReached.add(wordId);
             });
         });
 
         evidenceOptions.forEach(node => {
             if (node.text && node.text.length > 0) {
                 node.text.forEach(wordId => {
-                    allWordsUsed.add(wordId);
+                    allNodesReached.add(wordId);
                 });
             }
         })
@@ -130,13 +130,13 @@ describe('Dialogue System', () => {
         puzzleOptions.forEach(node => {
             if (node.text && node.text.length > 0) {
                 node.text.forEach(wordId => {
-                    allWordsUsed.add(wordId)
+                    allNodesReached.add(wordId)
                 })
             }
         })
         // TODO - Add evidence words
 
-        const unreachableIds = words.map(x => x.id).filter(id => !allWordsUsed.has(id));
+        const unreachableIds = words.map(x => x.id).filter(id => !allNodesReached.has(id));
 
         expect(unreachableIds).toEqual([]);
     });
