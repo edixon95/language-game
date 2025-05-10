@@ -23,7 +23,7 @@ To come:
 	- Music? Maybe
 
 # Tests
-## Dialogue
+- Dialogue
 	- Confirm all dialogueOptions have a "nextNode"
 	- Confirm both dialogueOptions and dialogueText has "text"
 	- Confirm all dialogueText has at least one choice (choices lead to the next dialogueOption)
