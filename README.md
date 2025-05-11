@@ -1,5 +1,8 @@
 # Language Game (Real name coming at some point)
 
+Note: I miss flash and the infinite free to play content the internet used to offer, this is (hopefully) one of many full free browser games that you'll be able to enjoy.
+Disclaimer: for this reason, you can do what you want with this game/code. Please just offer all the content for free <3
+
 Hi welcome to my project. I'll add documentation here to explain everything but as a general overview;
 
 This project came to mind from playing around with CSS animations and creating a cool little crt monitor effect so here it is, the idea that came from it.
