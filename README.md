@@ -17,7 +17,6 @@ This project uses Zustand to keep logic together and Jest for unit testing to ma
 	- Replace human words with language symbols
 	- Add space for the player to write their interpretation about each symbol
 	- Saving/Loading
-	- Chat history
 	- Evidence
 	- Actual dialogue trees and story
 	- Music? Maybe
@@ -38,6 +37,8 @@ This project uses Zustand to keep logic together and Jest for unit testing to ma
 - 10/08/2025:
 	- Beta UI start
 	- Starting to get things ready for messages; message class, chat icons
+   	- Create chat history, add chat icons
+   	- Recognise evidence being added
 
 - 10/07/2025:
 	- Update tests, not really sure what those original ones were trying to accomplish
