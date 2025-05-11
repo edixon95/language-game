@@ -1,7 +1,7 @@
-# Language Game (Real name coming at some point)
-
 Note: I miss flash and the infinite free to play content the internet used to offer, this is (hopefully) one of many full free browser games that you'll be able to enjoy.
 Disclaimer: for this reason, you can do what you want with this game/code. Please just offer all the content for free <3
+
+# Interview with an Alien
 
 Hi welcome to my project. I'll add documentation here to explain everything but as a general overview;
 
