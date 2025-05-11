@@ -6,8 +6,9 @@ export interface Word {
     playerTranslation?: string
 }
 
-export interface Item {
-    id: number;
-    name: string;
-    image: string;
+export interface Message {
+    type: number; // 1 = Player, 2 = Any NPC, 3 = General notification
+    npcId?: number;
+    npcMood?: number; // 1 = Neutral, 2 = Happy, 3 = Very happy, 4 = Sad
+    text: string | number[]; // String if in English
 }

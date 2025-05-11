@@ -34,8 +34,12 @@ This project uses Zustand to keep logic together and Jest for unit testing to ma
 	- Confirm all evidence is reachable
 	- Confirm all puzzles are reachable
 
-# Change log:
-- 10/07/225:
+# Dev log:
+- 10/08/2025:
+	- Beta UI start
+	- Starting to get things ready for messages; message class, chat icons
+
+- 10/07/2025:
 	- Update tests, not really sure what those original ones were trying to accomplish
 	- Add the last tests for dialogueTrees (TODO: Add evidence and puzzles to the tests once added)
 	- Add evidence, add puzzles, add testing. This should be all dialogue specific testing
