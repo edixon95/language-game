@@ -1,7 +1,8 @@
 import type { Message } from "../../types/index"; // adjust path as needed
 import { chatIcons } from "../../data/dialogues/chatIcons"
+import WordContainer from "./WordContainer";
 
-const ChatMessage = ({ type, npcId, npcMood, text }: Message) => {
+const ChatMessage = ({ type, npcId, npcMood, text, id }: Message) => {
 
     const getChatImage = (id: number | null, mood: number | null): string => {
         if (id === null || mood === null) return chatIcons[2][4];
@@ -9,7 +10,6 @@ const ChatMessage = ({ type, npcId, npcMood, text }: Message) => {
         const icon = chatIcons[id][mood];
         return icon
     };
-
 
     if (type === 1) {
         return (
@@ -20,9 +20,12 @@ const ChatMessage = ({ type, npcId, npcMood, text }: Message) => {
                     flexWrap: "wrap",
                     alignItems: "flex-start",
                     gap: 2,
-                    padding: 5
+                    padding: 5,
+                    
                 }}>
-                    <span style={{ wordWrap: "break-word" }}>{text}</span>
+                    <span style={{ wordWrap: "break-word", height: "20%" }}>
+                        <WordContainer text={text} editScreen={"history"} messageId={id} />
+                    </span>
                 </div>
                 <div style={{ width: "30%" }}>
                     {getChatImage(npcId, npcMood) &&
@@ -51,9 +54,11 @@ const ChatMessage = ({ type, npcId, npcMood, text }: Message) => {
                     flexWrap: "wrap",
                     alignItems: "flex-start",
                     gap: 2,
-                    padding: 5
+                    padding: 5,
                 }}>
-                    <span style={{ wordWrap: "break-word" }}>{text}</span>
+                    <span style={{ wordWrap: "break-word", height: "20%" }}>
+                        <WordContainer text={text} editScreen={"history"} messageId={id} />
+                    </span>
                 </div>
             </div>
         )
