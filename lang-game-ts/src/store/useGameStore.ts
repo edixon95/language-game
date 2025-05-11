@@ -12,6 +12,12 @@ interface GameState {
     };
     options?: DialogueOption[];
     chatHistory?: Message[];
+    wordState?: {
+        messageId: number;
+        wordId: number;
+        translation?: string | null;
+        editScreen: string | null;
+    };
     setWordList: (words: Word[]) => void;
     setCurrentNPCState: (state: { dialogueId: number; dialogueNode: DialogueNode }) => void;
     initGame: () => void;
@@ -19,6 +25,8 @@ interface GameState {
     selectNextInteraction: (nodeId: number, optionId: number) => void;
     createOptions: () => void;
     selectOption: (index: number) => void;
+    selectWordDefinition: (wordId: number, messageId: number, screen: string) => void;
+    updateWordDefinition: (definition: string, wordId: number) => void;
 }
 
 const updateWordListWithFoundWords = (wordList: Word[], text: number[]): Word[] => {
@@ -39,6 +47,7 @@ const areWordsFoundForOptions = (wordList: Word[], optionText: number[]): boolea
 
 const buildHistoryMessage = (text: string | number[], type: number, npcId: null | number, npcMood: null | number, history: Message[]): Message[] => {
     const newMessage: Message = {
+        id: history.length + 1,
         type: type,
         npcId: npcId,
         npcMood: npcMood,
@@ -58,6 +67,12 @@ export const useGameStore = create<GameState>((set, get) => ({
     wordList: [],
     currentNPCState: undefined,
     chatHistory: [],
+    wordState: {
+        messageId: 0,
+        wordId: 0,
+        translation: "",
+        editScreen: null
+    },
 
     setWordList: (words) => set({ wordList: words }),
     setCurrentNPCState: (state) => set({ currentNPCState: state }),
@@ -92,7 +107,7 @@ export const useGameStore = create<GameState>((set, get) => ({
                     currentNPCState: { dialogueId: 1, dialogueNode: startNode },
                     wordList: updatedWordList,
                     options: optionsToDisplay,
-                    chatHistory: newHistory
+                    chatHistory: newHistory,
                 };
             }
             return {}; // No state change
@@ -169,6 +184,35 @@ export const useGameStore = create<GameState>((set, get) => ({
         if (typeof nextNode !== 'number' || typeof optionId !== 'number') return;
 
         selectNextInteraction(nextNode, optionId);
+    },
+
+    selectWordDefinition: (wordId: number, messageId: number, screen: string) => {
+        const { wordList } = get();
+        const selectedWord = wordList.find((x) => x.id === wordId)
+        if (!selectedWord) return;
+
+
+        set(() => ({
+            wordState: {
+                wordId: wordId,
+                messageId: messageId,
+                translation: selectedWord.playerTranslation ? selectedWord.playerTranslation : "",
+                editScreen: screen,
+            }
+        }));
+    },
+
+    updateWordDefinition: (definition, wordId) => {
+        const { wordList } = get();
+        const wordIndex: number = wordList.findIndex((x) => x.id === wordId);
+        if (wordIndex === -1) return;
+        wordList[wordIndex].playerTranslation = definition;
+
+        set(() => {
+            return {
+                wordList: wordList
+            };
+        });
     }
 
 }));

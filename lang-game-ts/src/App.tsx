@@ -11,7 +11,6 @@ import background from "./assets/images/ui/background.png"
 function App() {
     const {
         initGame,
-        currentNPCState,
         displayFirstInteraction
     } = useGameStore();
 
@@ -20,9 +19,6 @@ function App() {
         initGame();
         displayFirstInteraction();
     }, []);
-
-
-    console.log(currentNPCState)
 
     return (
         <div style={{

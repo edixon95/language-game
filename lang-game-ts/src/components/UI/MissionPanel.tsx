@@ -23,6 +23,7 @@ export const MissionPanel = () => {
                                 npcId={history.npcId}
                                 npcMood={history.npcMood}
                                 text={history.text}
+                                id={history.id}
                             />
                         )
                     }) : <div>No history to display</div>
