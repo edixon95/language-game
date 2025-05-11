@@ -13,9 +13,6 @@ This project uses Zustand to keep logic together and Jest for unit testing to ma
 	- Zustand
 
 - To come:
-	- Basic UI art
-	- Replace human words with language symbols
-	- Add space for the player to write their interpretation about each symbol
 	- Saving/Loading
 	- Evidence
 	- Actual dialogue trees and story
@@ -34,11 +31,14 @@ This project uses Zustand to keep logic together and Jest for unit testing to ma
 	- Confirm all puzzles are reachable
 
 # Dev log:
-- 10/08/2025:
+- 11/07/2025:
 	- Beta UI start
 	- Starting to get things ready for messages; message class, chat icons
    	- Create chat history, add chat icons
    	- Recognise evidence being added
+   	- Add user translations
+   	- Add symbol mapping function
+   	- Add ability to edit translations
 
 - 10/07/2025:
 	- Update tests, not really sure what those original ones were trying to accomplish
