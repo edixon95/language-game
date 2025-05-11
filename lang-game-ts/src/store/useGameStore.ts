@@ -1,5 +1,5 @@
 import { create } from 'zustand'
-import type { Word, DialogueNode, DialogueOption } from "../types/index"
+import type { Word, DialogueNode, DialogueOption, Message } from "../types/index"
 import { dialogueText } from "../data/dialogues/dialogueText"
 import { dialogueOptions } from "../data/dialogues/dialogueOptions"
 import { words } from "../data/words/words"
@@ -11,11 +11,12 @@ interface GameState {
         dialogueNode: DialogueNode;
     };
     options?: DialogueOption[];
+    chatHistory?: Message[];
     setWordList: (words: Word[]) => void;
     setCurrentNPCState: (state: { dialogueId: number; dialogueNode: DialogueNode }) => void;
     initGame: () => void;
     displayFirstInteraction: () => void;
-    selectNextInteraction: (nodeId: number) => void;
+    selectNextInteraction: (nodeId: number, optionId: number) => void;
     createOptions: () => void;
     selectOption: (index: number) => void;
 }
@@ -36,9 +37,27 @@ const areWordsFoundForOptions = (wordList: Word[], optionText: number[]): boolea
     );
 };
 
+const buildHistoryMessage = (text: string | number[], type: number, npcId: null | number, npcMood: null | number, history: Message[]): Message[] => {
+    const newMessage: Message = {
+        type: type,
+        npcId: npcId,
+        npcMood: npcMood,
+        text: text
+    };
+
+    while (history.length >= 5) {
+        history.shift();
+    }
+
+    history.push(newMessage);
+
+    return history;
+}
+
 export const useGameStore = create<GameState>((set, get) => ({
     wordList: [],
     currentNPCState: undefined,
+    chatHistory: [],
 
     setWordList: (words) => set({ wordList: words }),
     setCurrentNPCState: (state) => set({ currentNPCState: state }),
@@ -63,22 +82,27 @@ export const useGameStore = create<GameState>((set, get) => ({
             areWordsFoundForOptions(updatedWordList, option.text)
         );
 
+        const initialHistory: Message[] = []
+        const newHistory: Message[] = buildHistoryMessage(startNode.text, 2, 2, 2, initialHistory)
+
         set(state => {
             const hasWordListChanged = updatedWordList.some((word, index) => word.isFound !== state.wordList[index]?.isFound);
             if (hasWordListChanged || state.currentNPCState?.dialogueId !== 1) {
                 return {
                     currentNPCState: { dialogueId: 1, dialogueNode: startNode },
                     wordList: updatedWordList,
-                    options: optionsToDisplay
+                    options: optionsToDisplay,
+                    chatHistory: newHistory
                 };
             }
             return {}; // No state change
         });
     },
 
-    selectNextInteraction: (nodeId) => {
+    selectNextInteraction: (nodeId, optionId) => {
+        const selectedOption = dialogueOptions.find((x) => x.id === optionId)
         const nextNode = dialogueText.find((x) => x.id === nodeId);
-        if (!nextNode) return;
+        if (!nextNode || !selectedOption) return;
 
         const updatedWordList = updateWordListWithFoundWords(get().wordList, nextNode.text);
 
@@ -87,17 +111,36 @@ export const useGameStore = create<GameState>((set, get) => ({
             areWordsFoundForOptions(updatedWordList, option.text)
         );
 
-        set(state => {
-            const hasWordListChanged = updatedWordList.some((word, index) => word.isFound !== state.wordList[index]?.isFound);
-            if (hasWordListChanged || state.currentNPCState?.dialogueId !== nodeId) {
-                return {
-                    currentNPCState: { dialogueId: nodeId, dialogueNode: nextNode },
-                    wordList: updatedWordList,
-                    options: optionsToDisplay
-                };
-            }
-            return {}; // No state change
+
+        // Flow will always be user response -> new node -> additional info
+        // Add player history and update before anything else so that text elements have time to be noticed
+        const { chatHistory = [] } = get();
+        let newHistory: Message[] = buildHistoryMessage(selectedOption.text, 1, null, null, chatHistory)
+
+        set(() => {
+            return {
+                options: optionsToDisplay
+            };
         });
+
+        setTimeout(() => {
+            newHistory = buildHistoryMessage(nextNode.text, 2, 2, 3, newHistory)
+            if (nextNode.evidence && nextNode.evidence.length > 0) {
+                newHistory = buildHistoryMessage("Evidence Added", 3, null, null, newHistory)
+            }
+
+            set(state => {
+                const hasWordListChanged = updatedWordList.some((word, index) => word.isFound !== state.wordList[index]?.isFound);
+                if (hasWordListChanged || state.currentNPCState?.dialogueId !== nodeId) {
+                    return {
+                        currentNPCState: { dialogueId: nodeId, dialogueNode: nextNode },
+                        wordList: updatedWordList,
+                        options: optionsToDisplay
+                    };
+                }
+                return {}; // No state change
+            });
+        }, 2000)
     },
 
     createOptions: () => {
@@ -122,9 +165,10 @@ export const useGameStore = create<GameState>((set, get) => ({
     selectOption: (index) => {
         const { options, selectNextInteraction } = get();
         const nextNode = options?.[index]?.nextNode;
-        if (typeof nextNode !== 'number') return;
+        const optionId = options?.[index].id
+        if (typeof nextNode !== 'number' || typeof optionId !== 'number') return;
 
-        selectNextInteraction(nextNode);
+        selectNextInteraction(nextNode, optionId);
     }
 
 }));
