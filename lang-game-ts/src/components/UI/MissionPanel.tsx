@@ -42,7 +42,7 @@ export const MissionPanel = ({ linesToType }: MissionPanelProps) => {
     }, [currentLineIndex, typedLines.length, linesToType]);
 
     return (
-        <div style={{ width: "20%" }} className="missionPanel">
+        <div style={{ width: "30%", border: "1px solid #00FF00", padding: 10 }} >
             <div>
                 {typedLines.map((line, index) => (
                     <p key={index} style={{marginBottom:10} }>{line}</p>

@@ -23,7 +23,7 @@ export const TextBox = () => {
             }}>
                 {options && options.length > 0 &&
                     options.map((op, index) => (
-                        <div key={index} style={{ border: "1px solid black", display: "flex", padding: 5, cursor: "pointer" }}
+                        <div key={index} style={{ border: "1px solid #00FF00", display: "flex", padding: 5, cursor: "pointer" }}
                             onClick={() => selectOption(index)}
                         >
                             <p>{op.meaning}</p>
