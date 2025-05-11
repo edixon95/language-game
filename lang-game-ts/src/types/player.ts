@@ -8,7 +8,7 @@ export interface Word {
 
 export interface Message {
     type: number; // 1 = Player, 2 = Any NPC, 3 = General notification
-    npcId?: number;
-    npcMood?: number; // 1 = Neutral, 2 = Happy, 3 = Very happy, 4 = Sad
+    npcId: null | number;
+    npcMood: null | number; // 1 = Neutral, 2 = Happy, 3 = Very happy, 4 = Sad
     text: string | number[]; // String if in English
 }

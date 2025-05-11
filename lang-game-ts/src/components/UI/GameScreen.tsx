@@ -1,11 +1,6 @@
-import { useGameStore } from "../../store/useGameStore";
 import alienImage  from "../../assets/images/alien/alien.png"
 
 export const GameScreen = () => {
-    const currentNPCState = useGameStore((s) => s.currentNPCState);
-    const options = useGameStore((s) => s.options);
-    const selectOption = useGameStore((s) => s.selectOption);
-
     return (
         <div style={{ display: "flex", border: "1px solid #00FF00", width: "70%" }}>
             <div style={{
