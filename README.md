@@ -41,6 +41,9 @@ This project uses Zustand to keep logic together and Jest for unit testing to ma
 	- Few issues with the layout of evidence but it's functional for now (TODO: Sort this out)
 	- Update testing symbols
 	- Input component added (TODO: clips a bit on multirow messages)
+	- EVIDENCE from here on out is displayed on the UI as "DOCUMENT"
+	- QoL chat message updates to make tracking documents easier
+	- Evidence (document) type updated to allow for custom names and descriptions
 
 - 11/05/2025:
 	- Beta UI start
