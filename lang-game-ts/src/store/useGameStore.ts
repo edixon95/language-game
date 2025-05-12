@@ -21,6 +21,7 @@ interface GameState {
         wordId: number;
         translation?: string | null;
         editScreen: string | null;
+        wordIndex?: string | null
     };
     evidenceState?: {
         evidenceId: number;
@@ -33,7 +34,7 @@ interface GameState {
     selectNextInteraction: (nodeId: number, optionId: number) => void;
     createOptions: () => void;
     selectOption: (index: number) => void;
-    selectWordDefinition: (wordId: number, messageId: number, screen: string) => void;
+    selectWordDefinition: (wordId: number, messageId: number, screen: string, wordIndex: number) => void;
     updateWordDefinition: (definition: string, wordId: number) => void;
     selectEvidence: (evidenceId: number) => void;
 }
@@ -82,7 +83,8 @@ export const useGameStore = create<GameState>((set, get) => ({
         messageId: 0,
         wordId: 0,
         translation: "",
-        editScreen: null
+        editScreen: null,
+        wordIndex: ""
     },
     evidenceState: {
         evidenceId: 0,
@@ -225,11 +227,10 @@ export const useGameStore = create<GameState>((set, get) => ({
         selectNextInteraction(nextNode, optionId);
     },
 
-    selectWordDefinition: (wordId: number, messageId: number, screen: string) => {
+    selectWordDefinition: (wordId: number, messageId: number, screen: string, wordIndex: number) => {
         const { wordList } = get();
         const selectedWord = wordList.find((x) => x.id === wordId)
         if (!selectedWord) return;
-
 
         set(() => ({
             wordState: {
@@ -237,6 +238,7 @@ export const useGameStore = create<GameState>((set, get) => ({
                 messageId: messageId,
                 translation: selectedWord.playerTranslation ? selectedWord.playerTranslation : "",
                 editScreen: screen,
+                wordIndex: String(wordIndex)
             }
         }));
     },
@@ -249,7 +251,14 @@ export const useGameStore = create<GameState>((set, get) => ({
 
         set(() => {
             return {
-                wordList: wordList
+                wordList: wordList,
+                wordState: {
+                    wordId: 0,
+                    messageId: 0,
+                    translation: "",
+                    editScreen: "",
+                    wordIndex: ""
+                }
             };
         });
     },
