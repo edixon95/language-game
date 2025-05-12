@@ -25,5 +25,5 @@ export interface Puzzle {
     text?: number[]; // wordId
     image?: string;
     isSolved?: boolean;
-    evidence?: number[]
+    evidence?: number[] // Rewards for solving
 }

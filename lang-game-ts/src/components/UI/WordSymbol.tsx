@@ -9,7 +9,8 @@ const WordSymbol = ({ symbol }: WordContainerProps) => {
                 <img
                     src={symbol}
                     style={{
-                        height: 60
+                        height: 60,
+                        width: 60
                     }}
                 />
             </div>

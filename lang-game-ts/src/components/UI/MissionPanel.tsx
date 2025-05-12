@@ -13,7 +13,8 @@ export const MissionPanel = () => {
                 flexDirection: "column",
                 gap: 10,
                 height: "100%",
-                overflow: "auto"
+                overflow: "auto",
+                paddingRight: 10
             }}>
                 {chatHistory && chatHistory.length > 0 ?
                     chatHistory.map((history) => {
