@@ -13,7 +13,7 @@ export const TextBox = () => {
                 alignItems: "center",
                 justifyContent: "center"
             }}>
-                <p>{currentNPCState?.dialogueNode.meaning ?? "No dialogue yet"}</p>
+                <p>{currentNPCState?.dialogueNode.meaning}</p>
             </div>
             <div style={{
                 display: "flex",

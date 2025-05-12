@@ -166,22 +166,53 @@ export const useGameStore = create<GameState>((set, get) => ({
         const { evidenceList = [] } = get();
         let newHistory: Message[] = buildHistoryMessage(selectedOption.text, 1, null, null, chatHistory)
 
+
+        // Not sure how I feel about this, options should 100% be hidden on click until something new is placed
+        // However I'm not sure if removing the NPC here to do the chat looks okay or not
+        //set(() => {
+        //    return {
+        //        chatHistory: newHistory,
+        //        options: [],
+        //    };
+        //});
+
         set(() => {
             return {
-                options: optionsToDisplay
+                chatHistory: newHistory,
+                options: [],
+                currentNPCState: undefined
             };
         });
 
         setTimeout(() => {
             newHistory = buildHistoryMessage(nextNode.text, 2, 2, 3, newHistory)
             if (nextNode.evidence && nextNode.evidence.length > 0) {
-                newHistory = buildHistoryMessage("Evidence Added", 3, null, null, newHistory)
                 // Make sure to add all the evidence 
+                const newEvidence: string[] = []
+                const oldEvidence: string[] = []
+                let evidenceCount = evidenceList.filter((x) => x.isFound).length
+
                 nextNode.evidence.forEach((ev) => {
                     const evIndex = evidenceList.findIndex((x) => x.id === ev)
-                    evidenceList[evIndex].isFound = true;
+                    if (evidenceList[evIndex].isFound) {
+                        oldEvidence.push(evidenceList[evIndex].name)
+                    } else {
+                        evidenceList[evIndex].isFound = true;
+                        ++evidenceCount
+                        evidenceList[evIndex].name = `Document ${evidenceCount}`
+                        newEvidence.push(evidenceList[evIndex].name)
+                    }
                 })
+                if (newEvidence.length > 0) {
+                    let evidenceString = `New documents: ${newEvidence.join(", ")}`
+                    newHistory = buildHistoryMessage(evidenceString, 3, null, null, newHistory)
+                }
 
+                if (oldEvidence.length > 0) {
+                    let evidenceString = `Mentioned documents: ${oldEvidence.join(", ")}`
+                    newHistory = buildHistoryMessage(evidenceString, 3, null, null, newHistory)
+                }
+                
             }
 
             set(state => {
@@ -191,7 +222,8 @@ export const useGameStore = create<GameState>((set, get) => ({
                         currentNPCState: { dialogueId: nodeId, dialogueNode: nextNode },
                         wordList: updatedWordList,
                         options: optionsToDisplay,
-                        evidenceList: evidenceList
+                        evidenceList: evidenceList, 
+                        chatHistory: newHistory
                     };
                 }
                 return {}; // No state change

@@ -12,13 +12,14 @@ export const dialogueText: DialogueNode[] = [
         meaning: "Yes?",
         text: [9, 6], // Question:Yes
         choices: [2, 3],
-        evidence: [1, ]
+        evidence: [1, 2, 3]
     },
     {
         id: 3,
         meaning: "You? Me?",
         text: [9, 3, 9, 4], // Question:You:Question:Me
         choices: [4, 5],
+        evidence: [3, 4]
     },
     { // This is just forcing the test to pass
         id: 4,

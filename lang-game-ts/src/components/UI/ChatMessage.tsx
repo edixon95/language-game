@@ -22,13 +22,13 @@ const ChatMessage = ({ type, npcId, npcMood, text, id }: Message) => {
                     gap: 2,
                     padding: 5,
                     justifyContent: "flex-end",
-                    
+
                 }}>
                     <span style={{ wordWrap: "break-word", height: "20%" }}>
                         <WordContainer text={text} editScreen={"history"} messageId={id} />
                     </span>
                 </div>
-                <div style={{ width: "20%"}}>
+                <div style={{ width: "20%" }}>
                     {getChatImage(npcId, npcMood) &&
                         <img src={getChatImage(npcId, npcMood)} style={{
                             width: "100%",
@@ -65,8 +65,9 @@ const ChatMessage = ({ type, npcId, npcMood, text, id }: Message) => {
     } else {
         return (
             <div style={{ display: "flex", minHeight: "10%", justifyContent: "center", alignItems: "center" }}>
-                <div style={{ border: "1px solid #00FF00", width: "58%", height: "100%", justifyContent: "center", alignItems: "center", display: "flex" }}>
-                    {text}
+                <div style={{ border: "1px solid #00FF00", width: "80%", height: "100%", justifyContent: "center", alignItems: "flex-start", display: "flex", flexDirection: "column", paddingLeft: 5, paddingRight: 5 }}>
+                    <span>{text && text.split(":")[0]}:</span>
+                    <span>{text && text.split(":")[1]}</span>
                 </div>
 
             </div>

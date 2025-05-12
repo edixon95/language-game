@@ -12,7 +12,7 @@ const EvidenceCard = ({ id, name, isViewed }: EvidenceCardProps) => {
     return (
         <div onClick={() => selectEvidence(id)} style={{
             border: "1px solid #00FF00",
-            width: "30%",
+            width: "45%",
             height: "49%"
 
         }}>
@@ -24,7 +24,7 @@ const EvidenceCard = ({ id, name, isViewed }: EvidenceCardProps) => {
                         }}
                     />
                 </div>
-                Evidence {name}
+                {name}
             </div>
         </div>
     )
