@@ -94,3 +94,23 @@
 }
 
 
+/* For Chromium-based browsers (Chrome, Edge, etc.) */
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: black;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: #00FF00;
+    border-radius: 0px;
+}
+
+/* Optional: corner styling */
+::-webkit-scrollbar-corner {
+    background: transparent;
+}
+

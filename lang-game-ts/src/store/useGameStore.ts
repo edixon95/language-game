@@ -1,11 +1,15 @@
 import { create } from 'zustand'
-import type { Word, DialogueNode, DialogueOption, Message } from "../types/index"
+import type { Word, DialogueNode, DialogueOption, Message, Evidence, Puzzle } from "../types/index"
 import { dialogueText } from "../data/dialogues/dialogueText"
 import { dialogueOptions } from "../data/dialogues/dialogueOptions"
 import { words } from "../data/words/words"
+import { evidenceOptions } from '../data/evidence/evidenceOptions'
+import { puzzleOptions } from '../data/puzzle/puzzleOptions'
 
 interface GameState {
     wordList: Word[];
+    evidenceList: Evidence[];
+    puzzleList: Puzzle[];
     currentNPCState?: {
         dialogueId: number;
         dialogueNode: DialogueNode;
@@ -18,6 +22,10 @@ interface GameState {
         translation?: string | null;
         editScreen: string | null;
     };
+    evidenceState?: {
+        evidenceId: number;
+        puzzleId?: number;
+    };
     setWordList: (words: Word[]) => void;
     setCurrentNPCState: (state: { dialogueId: number; dialogueNode: DialogueNode }) => void;
     initGame: () => void;
@@ -27,6 +35,7 @@ interface GameState {
     selectOption: (index: number) => void;
     selectWordDefinition: (wordId: number, messageId: number, screen: string) => void;
     updateWordDefinition: (definition: string, wordId: number) => void;
+    selectEvidence: (evidenceId: number) => void;
 }
 
 const updateWordListWithFoundWords = (wordList: Word[], text: number[]): Word[] => {
@@ -65,6 +74,8 @@ const buildHistoryMessage = (text: string | number[], type: number, npcId: null 
 
 export const useGameStore = create<GameState>((set, get) => ({
     wordList: [],
+    evidenceList: [],
+    puzzleList: [],
     currentNPCState: undefined,
     chatHistory: [],
     wordState: {
@@ -72,6 +83,10 @@ export const useGameStore = create<GameState>((set, get) => ({
         wordId: 0,
         translation: "",
         editScreen: null
+    },
+    evidenceState: {
+        evidenceId: 0,
+        puzzleId: 0,
     },
 
     setWordList: (words) => set({ wordList: words }),
@@ -83,7 +98,23 @@ export const useGameStore = create<GameState>((set, get) => ({
             image: `../src/assets/images/language/${i + 1}.png`,
             isFound: false,
         }));
-        set({ wordList: initializedWords });
+
+        const initializedEvidence = evidenceOptions.map((evidence, i) => ({
+            ...evidence,
+            isFound: false,
+            isViewed: false
+        }));
+
+        const initializedPuzzles = puzzleOptions.map((puzzle, i) => ({
+            ...puzzle,
+            isSolved: false
+        }));
+
+        set({
+            wordList: initializedWords,
+            evidenceList: initializedEvidence,
+            puzzleList: initializedPuzzles
+        });
     },
 
     displayFirstInteraction: () => {
@@ -130,6 +161,7 @@ export const useGameStore = create<GameState>((set, get) => ({
         // Flow will always be user response -> new node -> additional info
         // Add player history and update before anything else so that text elements have time to be noticed
         const { chatHistory = [] } = get();
+        const { evidenceList = [] } = get();
         let newHistory: Message[] = buildHistoryMessage(selectedOption.text, 1, null, null, chatHistory)
 
         set(() => {
@@ -142,6 +174,12 @@ export const useGameStore = create<GameState>((set, get) => ({
             newHistory = buildHistoryMessage(nextNode.text, 2, 2, 3, newHistory)
             if (nextNode.evidence && nextNode.evidence.length > 0) {
                 newHistory = buildHistoryMessage("Evidence Added", 3, null, null, newHistory)
+                // Make sure to add all the evidence 
+                nextNode.evidence.forEach((ev) => {
+                    const evIndex = evidenceList.findIndex((x) => x.id === ev)
+                    evidenceList[evIndex].isFound = true;
+                })
+
             }
 
             set(state => {
@@ -150,7 +188,8 @@ export const useGameStore = create<GameState>((set, get) => ({
                     return {
                         currentNPCState: { dialogueId: nodeId, dialogueNode: nextNode },
                         wordList: updatedWordList,
-                        options: optionsToDisplay
+                        options: optionsToDisplay,
+                        evidenceList: evidenceList
                     };
                 }
                 return {}; // No state change
@@ -213,6 +252,37 @@ export const useGameStore = create<GameState>((set, get) => ({
                 wordList: wordList
             };
         });
+    },
+
+    selectEvidence: (evidenceId: number) => {
+        const { evidenceList } = get();
+        const evidenceIndex = evidenceList.findIndex((x) => x.id === evidenceId);
+        if (evidenceIndex === -1) return;
+
+        evidenceList[evidenceIndex].isViewed = true;
+        const puzzleId = evidenceList[evidenceIndex].puzzle ? evidenceList[evidenceIndex].puzzle : 0;
+
+
+        const updatedWordList = updateWordListWithFoundWords(get().wordList, evidenceList[evidenceIndex].text ?? []);
+        const currentNode = dialogueText.find((x) => x.id === get().currentNPCState?.dialogueId);
+
+        let optionsToDisplay = get().options
+        if (currentNode) {
+            optionsToDisplay = dialogueOptions.filter(option =>
+                currentNode.choices.includes(option.id) &&
+                areWordsFoundForOptions(updatedWordList, option.text)
+            );
+        };
+
+        set(() => ({
+            evidenceState: {
+                evidenceId,
+                puzzleId
+            },
+            wordList: updatedWordList,
+            options: optionsToDisplay,
+        }));
     }
+
 
 }));

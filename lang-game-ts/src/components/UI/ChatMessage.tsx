@@ -13,21 +13,22 @@ const ChatMessage = ({ type, npcId, npcMood, text, id }: Message) => {
 
     if (type === 1) {
         return (
-            <div style={{ border: "1px solid #00FF00", display: "flex", alignItems: "stretch" }}>
+            <div style={{ border: "1px solid #00FF00", display: "flex", alignItems: "stretch", justifyContent: "space-between" }}>
                 <div style={{
-                    width: "70%",
+                    width: "80%",
                     display: "flex",
                     flexWrap: "wrap",
                     alignItems: "flex-start",
                     gap: 2,
                     padding: 5,
+                    justifyContent: "flex-end",
                     
                 }}>
                     <span style={{ wordWrap: "break-word", height: "20%" }}>
                         <WordContainer text={text} editScreen={"history"} messageId={id} />
                     </span>
                 </div>
-                <div style={{ width: "30%" }}>
+                <div style={{ width: "20%"}}>
                     {getChatImage(npcId, npcMood) &&
                         <img src={getChatImage(npcId, npcMood)} style={{
                             width: "100%",
@@ -40,7 +41,7 @@ const ChatMessage = ({ type, npcId, npcMood, text, id }: Message) => {
     } else if (type === 2) {
         return (
             <div style={{ border: "1px solid #00FF00", display: "flex", alignItems: "stretch" }}>
-                <div style={{ width: "30%" }}>
+                <div style={{ width: "20%" }}>
                     {getChatImage(npcId, npcMood) &&
                         <img src={getChatImage(npcId, npcMood)} style={{
                             width: "100%",
@@ -49,17 +50,16 @@ const ChatMessage = ({ type, npcId, npcMood, text, id }: Message) => {
                     }
                 </div>
                 <div style={{
-                    width: "70%",
+                    width: "80%",
                     display: "flex",
                     flexWrap: "wrap",
                     alignItems: "flex-start",
                     gap: 2,
                     padding: 5,
                 }}>
-                    <span style={{ wordWrap: "break-word", height: "20%" }}>
-                        <WordContainer text={text} editScreen={"history"} messageId={id} />
-                    </span>
+                    <WordContainer text={text} editScreen={"history"} messageId={id} />
                 </div>
+
             </div>
         )
     } else {
