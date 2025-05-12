@@ -2,6 +2,8 @@
 export type Evidence =
     | {
         id: number;
+        name: string;
+        notes: string;
         meaning: string;
         text: number[]; // wordId
         image?: string;
@@ -11,6 +13,8 @@ export type Evidence =
     }
     | {
         id: number;
+        name: string;
+        notes: string;
         meaning?: undefined;
         text?: undefined;
         image?: string;

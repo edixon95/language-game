@@ -16,11 +16,11 @@ const EvidenceContainer = () => {
         }}>
 
             {evidenceList && evidenceList.filter((e) => e.isFound).length > 0 ?
-                evidenceList.filter((e) => e.isFound).map((ev, index) => {
+                evidenceList.filter((e) => e.isFound).map((ev) => {
                     return (
                         <EvidenceCard
                             id={ev.id}
-                            name={String(index + 1)}
+                            name={ev.name}
                             isViewed={ev.isViewed ?? false}
                         />
                     )
