@@ -34,6 +34,12 @@ This project uses Zustand to keep logic together and Jest for unit testing to ma
 	- Confirm all puzzles are reachable
 
 # Dev log:
+- 12/05/2025:
+	- Quite a few changes coming in today already, scrollbars and scroll added
+	- Evidence screen and evidence select working
+	- Evidence now recognises it's been found, opened and can deliver words to the player
+	- Few issues with the layout of evidence but it's functional for now (TODO: Sort this out)
+
 - 11/05/2025:
 	- Beta UI start
 	- Starting to get things ready for messages; message class, chat icons
@@ -45,7 +51,7 @@ This project uses Zustand to keep logic together and Jest for unit testing to ma
 
 - 10/05/2025:
 	- Update tests, not really sure what those original ones were trying to accomplish
-	- Add the last tests for dialogueTrees (TODO: Add evidence and puzzles to the tests once added)
+	- Add the last tests for dialogueTrees
 	- Add evidence, add puzzles, add testing. This should be all dialogue specific testing
 
 - 09/05/2025:
