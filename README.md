@@ -39,6 +39,8 @@ This project uses Zustand to keep logic together and Jest for unit testing to ma
 	- Evidence screen and evidence select working
 	- Evidence now recognises it's been found, opened and can deliver words to the player
 	- Few issues with the layout of evidence but it's functional for now (TODO: Sort this out)
+	- Update testing symbols
+	- Input component added (TODO: clips a bit on multirow messages)
 
 - 11/05/2025:
 	- Beta UI start
