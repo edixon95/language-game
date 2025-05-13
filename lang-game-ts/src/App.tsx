@@ -43,7 +43,7 @@ function App() {
                     alt="Monitor UI"
                     style={{
                         width: "100%",
-                        height: "120%",
+                        height: "115%",
                         pointerEvents: "none",
                         zIndex: 2
                     }}
@@ -53,10 +53,10 @@ function App() {
                 <div
                     style={{
                         position: 'absolute',
-                        top: '8%',
-                        left: '16%',
-                        width: '68%',
-                        height: '90%',
+                        top: '5%',
+                        left: '13%',
+                        width: '74.5%',
+                        height: '96%',
                         zIndex: 1,
                         paddingLeft: "2%",
                         paddingRight: "2%",

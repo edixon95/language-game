@@ -10,7 +10,7 @@ interface InputBoxProps {
 const InputBox = ({ wordStateComp, setWordStateComp, handleBlur, shouldFocus }: InputBoxProps) => {
     const spanRef = useRef(null);
     const inputRef = useRef(null);
-    const [inputWidth, setInputWidth] = useState(20); // minimum width in px
+    const [inputWidth, setInputWidth] = useState(20);
 
 
     useEffect(() => {
@@ -22,7 +22,7 @@ const InputBox = ({ wordStateComp, setWordStateComp, handleBlur, shouldFocus }: 
     useEffect(() => {
         if (spanRef.current) {
             const spanWidth = spanRef.current.offsetWidth;
-            setInputWidth(Math.max(20, spanWidth + 5)); // +5 for some padding
+            setInputWidth(Math.max(20, spanWidth + 5)); 
         }
     }, [wordStateComp.translation]);
 
@@ -53,7 +53,6 @@ const InputBox = ({ wordStateComp, setWordStateComp, handleBlur, shouldFocus }: 
                 }}
 
             />
-            {/* Hidden span to calculate width */}
             <span
                 ref={spanRef}
                 style={{
