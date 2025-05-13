@@ -33,7 +33,7 @@ const EvidenceCard = ({ id, name, isViewed }: EvidenceCardProps) => {
     return (
         <div style={{
             border: "1px solid #00FF00",
-            width: "32%",
+            width: "48%",
             height: "49%",
             fontSize: 15
 
@@ -58,7 +58,6 @@ const EvidenceCard = ({ id, name, isViewed }: EvidenceCardProps) => {
                         width: "100%",
                         display: "flex",
                         flexDirection: "column",
-                        backgroundColor: "rgba(0, 255, 0, 0.2)",
                         paddingTop: "10%",
                         boxSizing: "border-box",
                     }}

@@ -10,6 +10,7 @@ export type Evidence =
         isFound?: boolean; // If can show in evidence menu
         isViewed?: boolean; // If player has viewed yet to determine if can show words
         puzzle?: number; // puzzleId
+        orderFound: number;
     }
     | {
         id: number;
@@ -21,6 +22,7 @@ export type Evidence =
         isFound?: boolean;
         isViewed?: boolean;
         puzzle?: number;
+        orderFound: number;
     };
 
 export interface Puzzle {

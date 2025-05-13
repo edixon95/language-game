@@ -66,7 +66,7 @@ const buildHistoryMessage = (text: string | number[], type: number, npcId: null 
         text: text
     };
 
-    while (history.length >= 5) {
+    while (history.length >= 7) {
         history.shift();
     }
 
@@ -201,6 +201,7 @@ export const useGameStore = create<GameState>((set, get) => ({
                     } else {
                         evidenceList[evIndex].isFound = true;
                         ++evidenceCount
+                        evidenceList[evIndex].orderFound = evidenceCount;
                         evidenceList[evIndex].name = `Document ${evidenceCount}`
                         newEvidence.push(evidenceList[evIndex].name)
                     }
@@ -216,6 +217,8 @@ export const useGameStore = create<GameState>((set, get) => ({
                 }
                 
             }
+
+            evidenceList.sort((a, b) => a.orderFound - b.orderFound);
 
             set(state => {
                 const hasWordListChanged = updatedWordList.some((word, index) => word.isFound !== state.wordList[index]?.isFound);
