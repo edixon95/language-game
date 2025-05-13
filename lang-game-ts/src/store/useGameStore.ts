@@ -38,6 +38,7 @@ interface GameState {
     updateWordDefinition: (definition: string, wordId: number) => void;
     selectEvidence: (evidenceId: number) => void;
     updateEvidence: (evidenceId: number, name: null | string, notes: null | string) => void;
+    deselectEvidence: () => void;
 }
 
 const updateWordListWithFoundWords = (wordList: Word[], text: number[]): Word[] => {
@@ -337,6 +338,15 @@ export const useGameStore = create<GameState>((set, get) => ({
 
         set(() => ({
             evidenceList: evidenceList
+        }));
+    },
+
+    deselectEvidence: () => {
+        set(() => ({
+            evidenceState: {
+                evidenceId: 0,
+                puzzleId: 0
+            },
         }));
     }
 

@@ -7,7 +7,7 @@ export const MissionPanel = () => {
     const chatHistory = useGameStore((s) => s.chatHistory)
 
     return (
-        <div style={{ width: "30%", border: "1px solid #00FF00", padding: 10 }} >
+        <div style={{ width: "40%", border: "1px solid #00FF00", padding: 10 }} >
             <div style={{
                 display: "flex",
                 flexDirection: "column",

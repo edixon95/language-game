@@ -1,25 +1,26 @@
 import { useGameStore } from "../../store/useGameStore";
 import EvidenceCard from "./EvidenceCard";
+import ViewEvidence from "./ViewEvidence";
 
 const EvidenceContainer = () => {
     const evidenceList = useGameStore((s) => s.evidenceList)
     const evidenceState = useGameStore((s) => s.evidenceState)
-
-    console.log(evidenceState)
 
     return (
         <div style={{
             display: "flex",
             flexWrap: "wrap",
             gap: "5px",
-            width: "98%",
+            width: "100%",
             height: "95%",
             overflow: "auto",
-            paddingLeft: "1.5%"
+            paddingLeft: "1.5%",
+            paddingRight: "1.5%",
+            justifyContent: "flex-start"
         }}>
 
             {evidenceState?.evidenceId !== 0 ?
-                null :
+                <ViewEvidence /> :
                 evidenceList && evidenceList.filter((e) => e.isFound).length > 0 ?
                     evidenceList.filter((e) => e.isFound).map((ev) => {
                         return (

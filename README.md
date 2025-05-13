@@ -38,6 +38,9 @@ This project uses Zustand to keep logic together and Jest for unit testing to ma
 	- Documents select and edit added
 	- Icons added
 	- I really like the alien, but the chat history and evidence window would probably enjoy that space a bit more hmm..
+	- Two Hours Later; Update, the alien is gone
+	- Update chat messages to help display a bit better on smaller resolutions
+	- Give the chat box the majority of the space gained by removing the alien
 
 - 12/05/2025:
 	- Quite a few changes coming in today already, scrollbars and scroll added

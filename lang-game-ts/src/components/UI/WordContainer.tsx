@@ -2,7 +2,6 @@ import WordSymbol from "./WordSymbol";
 import WordInput from "./WordInput"
 import { useGameStore } from "../../store/useGameStore";
 
-
 interface WordContainerProps {
     text: number[] | string;
     editScreen: string;

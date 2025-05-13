@@ -64,8 +64,8 @@ const ChatMessage = ({ type, npcId, npcMood, text, id }: Message) => {
         )
     } else {
         return (
-            <div style={{ display: "flex", minHeight: "10%", justifyContent: "center", alignItems: "center" }}>
-                <div style={{ border: "1px solid #00FF00", width: "80%", height: "100%", justifyContent: "center", alignItems: "flex-start", display: "flex", flexDirection: "column", paddingLeft: 5, paddingRight: 5 }}>
+            <div style={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
+                <div style={{ border: "1px solid #00FF00", width: "80%", height: "100%", justifyContent: "center", alignItems: "flex-start", display: "flex", flexDirection: "column", padding: 5 }}>
                     <span>{text && text.split(":")[0]}:</span>
                     <span>{text && text.split(":")[1]}</span>
                 </div>

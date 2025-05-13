@@ -1,16 +1,19 @@
 import type { Evidence } from "../../types/index"
+import Evidence1Image from "../../assets/images/alien/alien.png"
+
 
 export const evidenceOptions: Evidence[] = [
     {
         id: 1,
         meaning: "Home",
         text: [5],
-        puzzle: 1
+        image: Evidence1Image
     },
     {
         id: 2,
         meaning: "Go",
         text: [1],
+        puzzle: 1
     },
     {
         id: 3,
