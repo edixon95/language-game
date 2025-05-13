@@ -37,6 +37,7 @@ interface GameState {
     selectWordDefinition: (wordId: number, messageId: number, screen: string, wordIndex: number) => void;
     updateWordDefinition: (definition: string, wordId: number) => void;
     selectEvidence: (evidenceId: number) => void;
+    updateEvidence: (evidenceId: number, name: null | string, notes: null | string) => void;
 }
 
 const updateWordListWithFoundWords = (wordList: Word[], text: number[]): Word[] => {
@@ -322,6 +323,20 @@ export const useGameStore = create<GameState>((set, get) => ({
             },
             wordList: updatedWordList,
             options: optionsToDisplay,
+            evidenceList: evidenceList
+        }));
+    },
+
+    updateEvidence: (evidenceId: number, name: string | null, notes: string | null) => {
+        const { evidenceList } = get();
+        const evidenceIndex = evidenceList.findIndex((x) => x.id === evidenceId);
+        if (evidenceIndex === -1) return;
+
+        evidenceList[evidenceIndex].name = name ?? undefined;
+        evidenceList[evidenceIndex].notes = notes ?? undefined;
+
+        set(() => ({
+            evidenceList: evidenceList
         }));
     }
 

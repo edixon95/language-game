@@ -34,6 +34,11 @@ This project uses Zustand to keep logic together and Jest for unit testing to ma
 	- Confirm all puzzles are reachable
 
 # Dev log:
+- 13/05/2025:
+	- Documents select and edit added
+	- Icons added
+	- I really like the alien, but the chat history and evidence window would probably enjoy that space a bit more hmm..
+
 - 12/05/2025:
 	- Quite a few changes coming in today already, scrollbars and scroll added
 	- Evidence screen and evidence select working
