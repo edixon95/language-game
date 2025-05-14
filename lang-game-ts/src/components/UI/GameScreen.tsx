@@ -1,4 +1,4 @@
-import alienImage from "../../assets/images/alien/alien.png"
+import alienImage from "/assets/images/alien/alien.png"
 import EvidenceContainer from "./EvidenceContainer";
 
 export const GameScreen = () => {

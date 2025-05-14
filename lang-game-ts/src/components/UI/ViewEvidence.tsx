@@ -1,5 +1,5 @@
 import { useGameStore } from "../../store/useGameStore"
-import CancelButton from "../../assets/images/ui/icons/cancel-icon.png"
+import CancelButton from "/assets/images/ui/icons/cancel-icon.png"
 import { useEffect, useState } from "react"
 import type { Evidence } from "../../types/index"
 

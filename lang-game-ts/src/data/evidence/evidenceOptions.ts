@@ -1,5 +1,5 @@
 import type { Evidence } from "../../types/index"
-import Evidence1Image from "../../assets/images/alien/alien.png"
+import Evidence1Image from "/assets/images/alien/alien.png"
 
 
 export const evidenceOptions: Evidence[] = [

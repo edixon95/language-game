@@ -38,6 +38,7 @@ This project uses Zustand to keep logic together and Jest for unit testing to ma
 	- One week on this, today I'd like to finish the UI. I've started with cleaning up a few of the ts errors
 	- Finish bottom panel beta UI, need to figure out how to deal with these icons as the selects are a bit too big
 	- It also seems that multi line chat messages do not come through very nicely, potentially could fix with scroll bar but sorting these icons out might resolve a lot everything
+	- Electron setup for npm run build -> npm run dist, will need to look up grabbing the window options from within the app
 
 - 13/05/2025:
 	- Documents select and edit added

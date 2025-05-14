@@ -26,7 +26,6 @@ const EvidenceContainer = () => {
                         return (
                             <EvidenceCard
                                 id={ev.id}
-                                name={ev.name}
                                 isViewed={ev.isViewed ?? false}
                             />
                         )
