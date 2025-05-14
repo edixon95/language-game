@@ -103,13 +103,13 @@ export const useGameStore = create<GameState>((set, get) => ({
             isFound: false,
         }));
 
-        const initializedEvidence = evidenceOptions.map((evidence, i) => ({
+        const initializedEvidence = evidenceOptions.map((evidence) => ({
             ...evidence,
             isFound: false,
             isViewed: false
         }));
 
-        const initializedPuzzles = puzzleOptions.map((puzzle, i) => ({
+        const initializedPuzzles = puzzleOptions.map((puzzle) => ({
             ...puzzle,
             isSolved: false
         }));
@@ -197,13 +197,13 @@ export const useGameStore = create<GameState>((set, get) => ({
                 nextNode.evidence.forEach((ev) => {
                     const evIndex = evidenceList.findIndex((x) => x.id === ev)
                     if (evidenceList[evIndex].isFound) {
-                        oldEvidence.push(evidenceList[evIndex].name)
+                        oldEvidence.push(evidenceList[evIndex].name!)
                     } else {
                         evidenceList[evIndex].isFound = true;
                         ++evidenceCount
                         evidenceList[evIndex].orderFound = evidenceCount;
                         evidenceList[evIndex].name = `Document ${evidenceCount}`
-                        newEvidence.push(evidenceList[evIndex].name)
+                        newEvidence.push(evidenceList[evIndex].name!)
                     }
                 })
                 if (newEvidence.length > 0) {

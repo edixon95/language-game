@@ -42,7 +42,7 @@ const WordContainer = ({ text, editScreen, messageId }: WordContainerProps) => {
                                         maxWidth: 60,
                                         flex: "0 0 auto", 
                                     }}
-                                    onClick={() => selectWordDefinition(t, messageId, "history", index)}
+                                    onClick={() => selectWordDefinition(t, messageId, editScreen, index)}
                                 >
                                     <WordSymbol symbol={getWordSymbol(t)} />
                                     <WordInput word={getUserInput(t)} editScreen={editScreen} wordId={t} messageId={messageId} index={index} />

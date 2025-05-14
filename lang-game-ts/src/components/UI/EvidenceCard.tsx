@@ -5,11 +5,10 @@ import type { Evidence } from "../../types";
 
 interface EvidenceCardProps {
     id: number;
-    name: string;
     isViewed: boolean;
 }
 
-const EvidenceCard = ({ id, name, isViewed }: EvidenceCardProps) => {
+const EvidenceCard = ({ id, isViewed }: EvidenceCardProps) => {
     const selectEvidence = useGameStore((s) => s.selectEvidence)
     const evidenceList = useGameStore((s) => s.evidenceList)
     const updateEvidence = useGameStore((s) => s.updateEvidence)
