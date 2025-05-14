@@ -36,6 +36,8 @@ This project uses Zustand to keep logic together and Jest for unit testing to ma
 # Dev log:
 -14/05/25 (happy 1 week!):
 	- One week on this, today I'd like to finish the UI. I've started with cleaning up a few of the ts errors
+	- Finish bottom panel beta UI, need to figure out how to deal with these icons as the selects are a bit too big
+	- It also seems that multi line chat messages do not come through very nicely, potentially could fix with scroll bar but sorting these icons out might resolve a lot everything
 
 - 13/05/2025:
 	- Documents select and edit added
@@ -45,6 +47,7 @@ This project uses Zustand to keep logic together and Jest for unit testing to ma
 	- Update chat messages to help display a bit better on smaller resolutions
 	- Give the chat box the majority of the space gained by removing the alien
 	- Readd alien, I'm sorry
+	- Resolved evidence layout issue
 
 - 12/05/2025:
 	- Quite a few changes coming in today already, scrollbars and scroll added
