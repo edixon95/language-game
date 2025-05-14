@@ -34,7 +34,7 @@ This project uses Zustand to keep logic together and Jest for unit testing to ma
 	- Confirm all puzzles are reachable
 
 # Dev log:
--14/05/25 (happy 1 week!):
+- 14/05/25 (happy 1 week!):
 	- One week on this, today I'd like to finish the UI. I've started with cleaning up a few of the ts errors
 	- Finish bottom panel beta UI, need to figure out how to deal with these icons as the selects are a bit too big
 	- It also seems that multi line chat messages do not come through very nicely, potentially could fix with scroll bar but sorting these icons out might resolve a lot everything
