@@ -16,6 +16,7 @@ interface GameState {
     };
     options?: DialogueOption[];
     chatHistory?: Message[];
+    lastHistoryUpdate: string | undefined;
     wordState?: {
         messageId: number;
         wordId: number;
@@ -81,6 +82,7 @@ export const useGameStore = create<GameState>((set, get) => ({
     puzzleList: [],
     currentNPCState: undefined,
     chatHistory: [],
+    lastHistoryUpdate: new Date().toISOString(),
     wordState: {
         messageId: 0,
         wordId: 0,
@@ -142,6 +144,7 @@ export const useGameStore = create<GameState>((set, get) => ({
                     wordList: updatedWordList,
                     options: optionsToDisplay,
                     chatHistory: newHistory,
+                    lastHistoryUpdate: new Date().toISOString()
                 };
             }
             return {}; // No state change
@@ -181,7 +184,8 @@ export const useGameStore = create<GameState>((set, get) => ({
             return {
                 chatHistory: newHistory,
                 options: [],
-                currentNPCState: undefined
+                currentNPCState: undefined,
+                lastHistoryUpdate: new Date().toISOString()
             };
         });
 
@@ -189,20 +193,20 @@ export const useGameStore = create<GameState>((set, get) => ({
             newHistory = buildHistoryMessage(nextNode.text, 2, 2, 3, newHistory)
             if (nextNode.evidence && nextNode.evidence.length > 0) {
                 // Make sure to add all the evidence 
-                const newEvidence: string[] = []
-                const oldEvidence: string[] = []
+                const newEvidence: number[] = []
+                const oldEvidence: number[] = []
                 let evidenceCount = evidenceList.filter((x) => x.isFound).length
 
                 nextNode.evidence.forEach((ev) => {
                     const evIndex = evidenceList.findIndex((x) => x.id === ev)
                     if (evidenceList[evIndex].isFound) {
-                        oldEvidence.push(evidenceList[evIndex].name!)
+                        oldEvidence.push(evidenceList[evIndex].id!)
                     } else {
                         evidenceList[evIndex].isFound = true;
                         ++evidenceCount
                         evidenceList[evIndex].orderFound = evidenceCount;
                         evidenceList[evIndex].name = `Document ${evidenceCount}`
-                        newEvidence.push(evidenceList[evIndex].name!)
+                        newEvidence.push(evidenceList[evIndex].id!)
                     }
                 })
                 if (newEvidence.length > 0) {
@@ -227,7 +231,8 @@ export const useGameStore = create<GameState>((set, get) => ({
                         wordList: updatedWordList,
                         options: optionsToDisplay,
                         evidenceList: evidenceList, 
-                        chatHistory: newHistory
+                        chatHistory: newHistory,
+                        lastHistoryUpdate: new Date().toISOString()
                     };
                 }
                 return {}; // No state change

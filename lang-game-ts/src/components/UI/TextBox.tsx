@@ -7,10 +7,8 @@ export const TextBox = () => {
     const options = useGameStore((s) => s.options);
     const selectOption = useGameStore((s) => s.selectOption);
 
-    console.log(options)
-
     return (
-        <div style={{ display: "flex", flexDirection: "row", alignItems: "center", width: "100%", justifyContent: "space-between", paddingLeft: 10, paddingRight :10 }}>
+        <div style={{ display: "flex", flexDirection: "row", alignItems: "center", width: "100%", justifyContent: "space-between", paddingLeft: 10, paddingRight: 10, paddingTop: 10, paddingBottom: 10 }}>
             <div style={{
                 width: "45%",
                 display: "flex",
@@ -32,11 +30,11 @@ export const TextBox = () => {
                 overflow: "auto",
                 paddingTop: 10,
                 paddingBottom: 10,
-                paddingRight: 10
+                paddingRight: 10,
             }}>
                 {options && options.length > 0 &&
                     options.map((op, index) => (
-                        <div key={index} style={{ border: "1px solid #00FF00", display: "flex", justifyContent: "center", position: "relative" }}>
+                        <div key={index} style={{ border: "1px solid #00FF00", display: "flex", justifyContent: "center", position: "relative", paddingTop: 5, paddingBottom: 5 }}>
                             <WordContainer
                                 text={op.text}
                                 editScreen={"textReply"}

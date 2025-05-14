@@ -27,7 +27,7 @@ const WordContainer = ({ text, editScreen, messageId }: WordContainerProps) => {
                     <WordSymbol symbol={text} />
                 </div>
                 :
-                <div style={{ height: "100%", display: "flex", flexWrap: "wrap" }}>
+                <div style={{ height: "100%", display: "flex", flexWrap: "wrap", gap: 5 }}>
                     {text && text.length > 0 &&
                         text.map((t, index) => {
                             return (
@@ -40,7 +40,8 @@ const WordContainer = ({ text, editScreen, messageId }: WordContainerProps) => {
                                         justifyContent: "center",
                                         padding: 4,
                                         maxWidth: 60,
-                                        flex: "0 0 auto", 
+                                        flex: "0 0 auto",
+                                        width: 60
                                     }}
                                     onClick={() => selectWordDefinition(t, messageId, editScreen, index)}
                                 >

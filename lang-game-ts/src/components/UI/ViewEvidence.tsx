@@ -60,21 +60,21 @@ const ViewEvidence = () => {
                 <div
                     style={{
                         height: "70%",
-                        display: "flex",
-                        justifyContent: "center",
-                        alignItems: "flex-start",
                         overflowY: "auto",
                     }}
-                    className="missionPanelImage"
                 >
-                    <img
-                        src={selectedEvidence.image}
-                        style={{
-                            width: "100%",
-                            objectFit: "cover",
-                        }}
-                    />
+                    <div className="missionPanelImage">
+                        <img
+                            src={selectedEvidence.image}
+                            style={{
+                                width: "100%",
+                                objectFit: "cover",
+                                display: "block",
+                            }}
+                        />
+                    </div>
                 </div>
+
 
             ) : (
                 <div>text</div>

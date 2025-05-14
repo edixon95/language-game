@@ -75,7 +75,9 @@ const EvidenceCard = ({ id, isViewed }: EvidenceCardProps) => {
                                 <span>Name:</span>
                             </div>
                             <input
-                                value={evidence && evidence.name}
+                                className="no-focus-style"
+                                spellCheck={false}
+                                value={evidence &&evidence.name}
                                 onChange={(e) =>
                                     setEvidence((prev) =>
                                         prev
@@ -89,7 +91,9 @@ const EvidenceCard = ({ id, isViewed }: EvidenceCardProps) => {
                                 onBlur={handleBlur}
                                 style={{
                                     backgroundColor: "transparent",
-                                    border: "1px solid #00FF00",
+                                    border: "none",
+                                    borderTop: "1px solid #00FF00",
+                                    borderBottom: "1px solid #00FF00",
                                     width: "100%",
                                     height: "70%",
                                     color: "#00FF00",
@@ -120,6 +124,8 @@ const EvidenceCard = ({ id, isViewed }: EvidenceCardProps) => {
                             <span>Notes:</span>
                         </div>
                         <textarea
+                            className="no-focus-style"
+                            spellCheck={false}
                             value={evidence && evidence.notes}
                             onChange={(e) =>
                                 setEvidence((prev) =>
@@ -134,7 +140,8 @@ const EvidenceCard = ({ id, isViewed }: EvidenceCardProps) => {
                             onBlur={handleBlur}
                             style={{
                                 backgroundColor: "transparent",
-                                border: "1px solid #00FF00",
+                                border: "none",
+                                borderTop: "1px solid #00FF00",
                                 width: "100%",
                                 height: "80%",
                                 color: "#00FF00",

@@ -114,3 +114,7 @@
     background: transparent;
 }
 
+.no-focus-style:focus {
+    outline: none;
+    box-shadow: none;
+}
