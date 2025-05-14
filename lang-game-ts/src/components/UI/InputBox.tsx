@@ -35,6 +35,8 @@ const InputBox = ({ wordStateComp, setWordStateComp, handleBlur, shouldFocus }: 
     return (
         <div style={{ display: "inline-block", position: "relative" }}>
             <input
+                className="no-focus-style"
+                spellCheck={false}
                 ref={inputRef}
                 value={wordStateComp.translation}
                 onChange={(e) =>
@@ -45,11 +47,11 @@ const InputBox = ({ wordStateComp, setWordStateComp, handleBlur, shouldFocus }: 
                 style={{
                     backgroundColor: "transparent",
                     border: "none",
-                    borderBottom: "1px solid #00FF00",
                     width: inputWidth,
                     minWidth: 20,
                     color: "#00FF00",
                     caretColor: "#00FF00",
+                    textAlign: "center"
                 }}
 
             />

@@ -25,6 +25,7 @@ const EvidenceContainer = () => {
                     evidenceList.filter((e) => e.isFound).map((ev) => {
                         return (
                             <EvidenceCard
+                                key={ev.id}
                                 id={ev.id}
                                 isViewed={ev.isViewed ?? false}
                             />
