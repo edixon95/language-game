@@ -7,6 +7,8 @@ import { evidenceOptions } from '../data/evidence/evidenceOptions'
 import { puzzleOptions } from '../data/puzzle/puzzleOptions'
 
 interface GameState {
+    gameScreen: string;
+    panelScreen: string;
     wordList: Word[];
     evidenceList: Evidence[];
     puzzleList: Puzzle[];
@@ -40,12 +42,15 @@ interface GameState {
     selectEvidence: (evidenceId: number) => void;
     updateEvidence: (evidenceId: number, name: null | string, notes: null | string) => void;
     deselectEvidence: () => void;
+    selectPanelScreen: (screen: string) => void;
 }
 
 const updateWordListWithFoundWords = (wordList: Word[], text: number[]): Word[] => {
+    let count = wordList.filter((x) => x.isFound).length
     return wordList.map(word => {
         if (text.includes(word.id)) {
-            return { ...word, isFound: true };
+            count++
+            return { ...word, isFound: true, orderFound: count };
         }
         return word;
     });
@@ -77,6 +82,8 @@ const buildHistoryMessage = (text: string | number[], type: number, npcId: null 
 }
 
 export const useGameStore = create<GameState>((set, get) => ({
+    gameScreen: "game",
+    panelScreen: "history",
     wordList: [],
     evidenceList: [],
     puzzleList: [],
@@ -141,7 +148,11 @@ export const useGameStore = create<GameState>((set, get) => ({
             if (hasWordListChanged || state.currentNPCState?.dialogueId !== 1) {
                 return {
                     currentNPCState: { dialogueId: 1, dialogueNode: startNode },
-                    wordList: updatedWordList,
+                    wordList: updatedWordList.sort((a, b) => {
+                        if (a.orderFound == null) return 1;
+                        if (b.orderFound == null) return -1;
+                        return a.orderFound - b.orderFound;
+                    }),
                     options: optionsToDisplay,
                     chatHistory: newHistory,
                     lastHistoryUpdate: new Date().toISOString()
@@ -218,7 +229,7 @@ export const useGameStore = create<GameState>((set, get) => ({
                     let evidenceString = `Mentioned documents: ${oldEvidence.join(", ")}`
                     newHistory = buildHistoryMessage(evidenceString, 3, null, null, newHistory)
                 }
-                
+
             }
 
             evidenceList.sort((a, b) => a.orderFound - b.orderFound);
@@ -228,9 +239,13 @@ export const useGameStore = create<GameState>((set, get) => ({
                 if (hasWordListChanged || state.currentNPCState?.dialogueId !== nodeId) {
                     return {
                         currentNPCState: { dialogueId: nodeId, dialogueNode: nextNode },
-                        wordList: updatedWordList,
+                        wordList: updatedWordList.sort((a, b) => {
+                            if (a.orderFound == null) return 1;
+                            if (b.orderFound == null) return -1;
+                            return a.orderFound - b.orderFound;
+                        }),
                         options: optionsToDisplay,
-                        evidenceList: evidenceList, 
+                        evidenceList: evidenceList,
                         chatHistory: newHistory,
                         lastHistoryUpdate: new Date().toISOString()
                     };
@@ -299,7 +314,8 @@ export const useGameStore = create<GameState>((set, get) => ({
                     translation: "",
                     editScreen: "",
                     wordIndex: ""
-                }
+                },
+                lastHistoryUpdate: new Date().toISOString()
             };
         });
     },
@@ -329,7 +345,11 @@ export const useGameStore = create<GameState>((set, get) => ({
                 evidenceId,
                 puzzleId
             },
-            wordList: updatedWordList,
+            wordList: updatedWordList.sort((a, b) => {
+                if (a.orderFound == null) return 1;
+                if (b.orderFound == null) return -1;
+                return a.orderFound - b.orderFound;
+            }),
             options: optionsToDisplay,
             evidenceList: evidenceList
         }));
@@ -354,6 +374,12 @@ export const useGameStore = create<GameState>((set, get) => ({
                 evidenceId: 0,
                 puzzleId: 0
             },
+        }));
+    },
+
+    selectPanelScreen: (screen: string) => {
+        set(() => ({
+            panelScreen: screen
         }));
     }
 

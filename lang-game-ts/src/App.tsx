@@ -53,15 +53,15 @@ function App() {
                 <div
                     style={{
                         position: 'absolute',
-                        top: '5%',
-                        left: '13%',
+                        top: '4.5%',
+                        left: '12.9%',
                         width: '74.5%',
                         height: '96%',
                         zIndex: 1,
                         paddingLeft: "2%",
                         paddingRight: "2%",
                         paddingTop: "1%",
-                        paddingBottom: "7%"
+                        paddingBottom: "4%"
                     }}
                     className="missionPanel"
                 >
@@ -79,7 +79,7 @@ function App() {
                         <div style={{
                             display: "flex",
                             width: "95%",
-                            height: "75%",
+                            height: "70%",
                             justifyContent: "center",
                             gap: 10
                         }}>
@@ -88,7 +88,7 @@ function App() {
                         </div>
                         <div style={{
                             display: "flex",
-                            height: "20%",
+                            height: "25%",
                             border: "1px solid #00FF00",
                             width: "95%"
                         }}>

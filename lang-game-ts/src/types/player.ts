@@ -4,6 +4,7 @@ export interface Word {
     meaning: string[];
     isFound?: boolean;
     playerTranslation?: string
+    orderFound?: number | undefined
 }
 
 export interface Message {

@@ -29,6 +29,12 @@ const EvidenceCard = ({ id, isViewed }: EvidenceCardProps) => {
         }
     }
 
+    const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+        if (e.key === "Enter") {
+            handleBlur();
+        }
+    };
+
     return (
         <div style={{
             border: "1px solid #00FF00",
@@ -88,6 +94,7 @@ const EvidenceCard = ({ id, isViewed }: EvidenceCardProps) => {
                                             : prev
                                     )
                                 }
+                                onKeyDown={handleKeyDown }
                                 onBlur={handleBlur}
                                 style={{
                                     backgroundColor: "transparent",

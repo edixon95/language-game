@@ -1,48 +1,34 @@
-import { useEffect, useRef } from "react";
 import { useGameStore } from "../../store/useGameStore";
-import ChatMessage from "./ChatMessage";
+import ChatHistory from "./ChatHistory";
+import Dictionary from "./Dictionary";
+import UIButtons from "./UIButtons";
+import React, { useEffect, useState } from "react"
 
+
+type PanelType = "history" | "dictionary";
+
+// 2. Define the mapping type
+const panels: Record<PanelType, React.ReactElement> = {
+    history: <ChatHistory />,
+    dictionary: <Dictionary />
+};
 
 export const MissionPanel = () => {
+    const panelScreen = useGameStore((s) => s.panelScreen as PanelType);
 
-    const chatHistory = useGameStore((s) => s.chatHistory)
-    const lastHistoryUpdate = useGameStore((s) => s.lastHistoryUpdate)
+    const [screenPanel, setScreenPanel] = useState<React.ReactElement>(<ChatHistory />);
 
-    const scrollRef = useRef<HTMLDivElement>(null);
     useEffect(() => {
-        if (scrollRef.current) {
-            scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
-        }
-    }, [lastHistoryUpdate]);
-    
+        setScreenPanel(panels[panelScreen]);
+    }, [panelScreen]);
+
 
     return (
-        <div style={{ width: "35%", border: "1px solid #00FF00", padding: 10 }} >
-            <div
-                ref={scrollRef}
-                style={{
-                    display: "flex",
-                    flexDirection: "column",
-                    gap: 10,
-                    height: "100%",
-                    overflow: "auto",
-                    paddingRight: 10
-                }}>
-                {chatHistory && chatHistory.length > 0 ?
-                    chatHistory.map((history) => {
-                        return (
-                            <ChatMessage
-                                key={history.id}
-                                type={history.type}
-                                npcId={history.npcId}
-                                npcMood={history.npcMood}
-                                text={history.text}
-                                id={history.id}
-                            />
-                        )
-                    }) : <div>No history to display</div>
-                }
+        <div style={{ width: "35%", border: "1px solid #00FF00" }} >
+            <div style={{ height: "90%" }}>
+                {screenPanel}
             </div>
+            <UIButtons />
         </div>
     );
 };

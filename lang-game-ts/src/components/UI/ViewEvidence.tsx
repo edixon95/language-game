@@ -43,7 +43,9 @@ const ViewEvidence = () => {
                                 : prev
                         )
                     }
+                    className="no-focus-style"
                     onBlur={handleBlur}
+                    spellCheck={false}
                     style={{
                         backgroundColor: "transparent",
                         border: "1px solid #00FF00",
@@ -82,6 +84,7 @@ const ViewEvidence = () => {
             <div style={{ height: "20%", display: "flex", flexDirection: "column", justifyContent: "space-between" }}>
                 Notes
                 <textarea
+                    className="no-focus-style"
                     value={evidence && evidence.notes}
                     onChange={(e) =>
                         setEvidence((prev) =>
@@ -94,6 +97,7 @@ const ViewEvidence = () => {
                         )
                     }
                     onBlur={handleBlur}
+                    spellCheck={false}
                     style={{
                         backgroundColor: "transparent",
                         border: "1px solid #00FF00",
