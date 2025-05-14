@@ -66,8 +66,8 @@ const ChatMessage = ({ type, npcId, npcMood, text, id }: Message) => {
         return (
             <div style={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
                 <div style={{ border: "1px solid #00FF00", width: "80%", height: "100%", justifyContent: "center", alignItems: "flex-start", display: "flex", flexDirection: "column", padding: 5 }}>
-                    <span>{text && text.split(":")[0]}:</span>
-                    <span>{text && text.split(":")[1]}</span>
+                    <span>{text && typeof text === "string" && text.split(":")[0]}:</span>
+                    <span>{text && typeof text === "string" && text.split(":")[1]}</span>
                 </div>
 
             </div>

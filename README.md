@@ -34,6 +34,9 @@ This project uses Zustand to keep logic together and Jest for unit testing to ma
 	- Confirm all puzzles are reachable
 
 # Dev log:
+-14/05/25 (happy 1 week!):
+	- One week on this, today I'd like to finish the UI. I've started with cleaning up a few of the ts errors
+
 - 13/05/2025:
 	- Documents select and edit added
 	- Icons added
@@ -41,6 +44,7 @@ This project uses Zustand to keep logic together and Jest for unit testing to ma
 	- Two Hours Later; Update, the alien is gone
 	- Update chat messages to help display a bit better on smaller resolutions
 	- Give the chat box the majority of the space gained by removing the alien
+	- Readd alien, I'm sorry
 
 - 12/05/2025:
 	- Quite a few changes coming in today already, scrollbars and scroll added

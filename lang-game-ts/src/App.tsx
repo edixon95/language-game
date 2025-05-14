@@ -84,12 +84,7 @@ function App() {
                             gap: 10
                         }}>
                             <GameScreen />
-                            <MissionPanel linesToType={[
-                                "How does this screen look?",
-                                "I think maybe the text is a bit too slow for things that are long, but hey it gives time for you to see the tracking line",
-                                "What tracking line?",
-                                "Look, it's right there!"
-                            ]} />
+                            <MissionPanel />
                         </div>
                         <div style={{
                             display: "flex",
