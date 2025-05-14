@@ -1,3 +1,4 @@
+import React from "react"
 import type { Message } from "../../types/index"; // adjust path as needed
 import { chatIcons } from "../../data/dialogues/chatIcons"
 import WordContainer from "./WordContainer";
@@ -6,21 +7,36 @@ import { useGameStore } from "../../store/useGameStore";
 const ChatMessage = ({ type, npcId, npcMood, text, id }: Message) => {
 
     const evidenceList = useGameStore((s) => s.evidenceList)
+    const selectEvidence = useGameStore((s) => s.selectEvidence)
 
-    const getEvidenceNames = (evidenceString: string): string => {
-        const evidenceArray = evidenceString.split("")
-        let tempEvidenceList: string[] = []
+    const getEvidenceNames = (evidenceString: string): React.ReactNode[] => {
+        const evidenceArray = evidenceString.split("");
+        const nodes: React.ReactNode[] = [];
 
-        evidenceArray.forEach((evidenceNumberAsString) => {
-            const foundEvidence = evidenceList.find((x) => x.id === Number(evidenceNumberAsString))
+        evidenceArray.forEach((evidenceNumberAsString, index) => {
+            const foundEvidence = evidenceList.find(
+                (x) => x.id === Number(evidenceNumberAsString)
+            );
+
             if (foundEvidence) {
-                tempEvidenceList.push(foundEvidence.name!)
+                if (nodes.length > 0) {
+                    nodes.push(<span key={`comma-${index}`}>, </span>);
+                }
+
+                nodes.push(
+                    <div
+                        key={`evidence-${index}`}
+                        onClick={() => selectEvidence(Number(evidenceNumberAsString))}
+                        style={{ cursor: "pointer", display: "inline", borderBottom: "1px solid #00FF00" }}
+                    >
+                        {foundEvidence.name}
+                    </div>
+                );
             }
+        });
 
-        })
-
-        return tempEvidenceList.join(", ")
-    }
+        return nodes;
+    };
 
     const getChatImage = (id: number | null, mood: number | null): string => {
         if (id === null || mood === null) return chatIcons[2][4];
