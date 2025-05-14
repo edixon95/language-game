@@ -14,6 +14,7 @@ This project uses Zustand to keep logic together and Jest for unit testing to ma
 	- TypeScript
 	- Jest
 	- Zustand
+ 	- Electron (for bundling at the end) 
 
 - To come:
 	- Saving/Loading
