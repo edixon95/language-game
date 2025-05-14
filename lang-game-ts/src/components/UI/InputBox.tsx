@@ -8,8 +8,8 @@ interface InputBoxProps {
 }
 
 const InputBox = ({ wordStateComp, setWordStateComp, handleBlur, shouldFocus }: InputBoxProps) => {
-    const spanRef = useRef(null);
-    const inputRef = useRef(null);
+    const spanRef = useRef<HTMLSpanElement | null>(null);
+    const inputRef = useRef<HTMLInputElement | null>(null);
     const [inputWidth, setInputWidth] = useState(20);
 
 

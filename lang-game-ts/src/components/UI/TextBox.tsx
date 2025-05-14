@@ -1,6 +1,6 @@
 import { useGameStore } from "../../store/useGameStore";
 import WordContainer from "./WordContainer";
-import ConfirmIcon from "../../assets/images/ui/icons/confirm-icon.png"
+import ConfirmIcon from "/assets/images/ui/icons/confirm-icon.png"
 
 export const TextBox = () => {
     const currentNPCState = useGameStore((s) => s.currentNPCState);

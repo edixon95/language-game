@@ -97,9 +97,8 @@ export const useGameStore = create<GameState>((set, get) => ({
     setCurrentNPCState: (state) => set({ currentNPCState: state }),
 
     initGame: () => {
-        const initializedWords = words.map((word, i) => ({
+        const initializedWords = words.map((word) => ({
             ...word,
-            image: `../src/assets/images/language/${i + 1}.png`,
             isFound: false,
         }));
 

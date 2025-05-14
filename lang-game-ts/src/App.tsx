@@ -5,8 +5,8 @@ import { TextBox } from './components/UI/TextBox'
 import { useEffect } from "react"
 
 import { useGameStore } from "../src/store/useGameStore"
-import monitorUI from "./assets/images/ui/monitor.png"
-import background from "./assets/images/ui/background.png"
+import monitorUI from "/assets/images/ui/monitor.png"
+import background from "/assets/images/ui/background.png"
 
 function App() {
     const {

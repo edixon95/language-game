@@ -1,5 +1,5 @@
 import { useGameStore } from "../../store/useGameStore";
-import OpenIcon from "../../assets/images/ui/icons/open-icon.png";
+import OpenIcon from "/assets/images/ui/icons/open-icon.png";
 import { useEffect, useState } from "react";
 import type { Evidence } from "../../types";
 
