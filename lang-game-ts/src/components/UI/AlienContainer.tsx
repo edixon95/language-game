@@ -11,14 +11,14 @@ const AlienContainer = () => {
         let blinkTimeout: NodeJS.Timeout
 
         const scheduleBlink = () => {
-            const delay = Math.random() * (20000 - 7000) + 7000
+            const delay = Math.random() * (16000 - 7000) + 7000
 
             blinkTimeout = setTimeout(() => {
                 setIsBlink(true)
                 setTimeout(() => {
                     setIsBlink(false)
                     scheduleBlink()
-                }, 300)
+                }, 350)
             }, delay)
         }
 
