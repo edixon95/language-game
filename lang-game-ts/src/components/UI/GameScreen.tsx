@@ -1,7 +1,9 @@
-import alienImage from "/assets/images/alien/alien.png"
 import EvidenceContainer from "./EvidenceContainer";
+import AlienContainer from "./AlienContainer";
 
 export const GameScreen = () => {
+   
+
     return (
         <div style={{ display: "flex", border: "1px solid #00FF00", width: "65%", height: "100%" }}>
             <div style={{
@@ -13,15 +15,9 @@ export const GameScreen = () => {
             }}>
                 <EvidenceContainer />
             </div>
-            <div style={{
-                width: "40%",
-                background: `url(${alienImage})`,
-                backgroundSize: "cover",
-                backgroundPosition: "center"
-            }}
-                className="missionPanelImage"
-            >
-            </div>
+
+           <AlienContainer />
+
         </div>
     );
 };

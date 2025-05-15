@@ -35,6 +35,9 @@ This project uses Zustand to keep logic together and Jest for unit testing to ma
 	- Confirm all puzzles are reachable
 
 # Dev log:
+- 15/05/25
+	- Starting work on the alien today, got some blinking in place (TODO: get proper eyelids), next step is to look into talking animations for different emotions, as well as just the different emotions
+
 - 14/05/25 (happy 1 week!):
 	- One week on this, today I'd like to finish the UI. I've started with cleaning up a few of the ts errors
 	- Finish bottom panel beta UI, need to figure out how to deal with these icons as the selects are a bit too big
