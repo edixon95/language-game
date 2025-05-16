@@ -12,7 +12,7 @@ export const dialogueText: DialogueNode[] = [
         meaning: "Yes?",
         text: [9, 6], // Question:Yes
         choices: [2, 3],
-        evidence: [1, 5, 7, 8]
+        evidence: [1]
     },
     {
         id: 3,

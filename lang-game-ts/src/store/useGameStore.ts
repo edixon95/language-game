@@ -15,6 +15,7 @@ interface GameState {
     currentNPCState?: {
         dialogueId: number;
         dialogueNode: DialogueNode;
+        wordsToSay: number;
     };
     options?: DialogueOption[];
     chatHistory?: Message[];
@@ -147,7 +148,7 @@ export const useGameStore = create<GameState>((set, get) => ({
             const hasWordListChanged = updatedWordList.some((word, index) => word.isFound !== state.wordList[index]?.isFound);
             if (hasWordListChanged || state.currentNPCState?.dialogueId !== 1) {
                 return {
-                    currentNPCState: { dialogueId: 1, dialogueNode: startNode },
+                    currentNPCState: { dialogueId: 1, dialogueNode: startNode, wordsToSay: startNode.text.length },
                     wordList: updatedWordList.sort((a, b) => {
                         if (a.orderFound == null) return 1;
                         if (b.orderFound == null) return -1;
@@ -238,7 +239,7 @@ export const useGameStore = create<GameState>((set, get) => ({
                 const hasWordListChanged = updatedWordList.some((word, index) => word.isFound !== state.wordList[index]?.isFound);
                 if (hasWordListChanged || state.currentNPCState?.dialogueId !== nodeId) {
                     return {
-                        currentNPCState: { dialogueId: nodeId, dialogueNode: nextNode },
+                        currentNPCState: { dialogueId: nodeId, dialogueNode: nextNode, wordsToSay: nextNode.text.length },
                         wordList: updatedWordList.sort((a, b) => {
                             if (a.orderFound == null) return 1;
                             if (b.orderFound == null) return -1;
@@ -351,7 +352,8 @@ export const useGameStore = create<GameState>((set, get) => ({
                 return a.orderFound - b.orderFound;
             }),
             options: optionsToDisplay,
-            evidenceList: evidenceList
+            evidenceList: evidenceList,
+            lastHistoryUpdate: new Date().toISOString()
         }));
     },
 
@@ -364,7 +366,8 @@ export const useGameStore = create<GameState>((set, get) => ({
         evidenceList[evidenceIndex].notes = notes ?? undefined;
 
         set(() => ({
-            evidenceList: evidenceList
+            evidenceList: evidenceList,
+            lastHistoryUpdate: new Date().toISOString()
         }));
     },
 

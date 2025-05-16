@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useState, useEffect } from "react"
 import type { Message } from "../../types/index"; // adjust path as needed
 import { chatIcons } from "../../data/dialogues/chatIcons"
 import WordContainer from "./WordContainer";
@@ -8,6 +8,13 @@ const ChatMessage = ({ type, npcId, npcMood, text, id }: Message) => {
 
     const evidenceList = useGameStore((s) => s.evidenceList)
     const selectEvidence = useGameStore((s) => s.selectEvidence)
+
+    const [_, forceRerender] = useState(0);
+    const lastHistoryUpdate = useGameStore((s) => s.lastHistoryUpdate);
+
+    useEffect(() => {
+        forceRerender((x) => x + 1);
+    }, [lastHistoryUpdate]);
 
     const getEvidenceNames = (evidenceString: string): React.ReactNode[] => {
         const evidenceArray = evidenceString.split("");
@@ -34,7 +41,6 @@ const ChatMessage = ({ type, npcId, npcMood, text, id }: Message) => {
                 );
             }
         });
-
         return nodes;
     };
 
@@ -97,15 +103,26 @@ const ChatMessage = ({ type, npcId, npcMood, text, id }: Message) => {
             </div>
         )
     } else {
+        const [label, evidenceIds] = typeof text === "string" ? text.split(":") : ["", ""];
+        const evidenceNodes = getEvidenceNames(evidenceIds);
+
         return (
             <div style={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
-                <div style={{ border: "1px solid #00FF00", width: "80%", height: "100%", justifyContent: "center", alignItems: "flex-start", display: "flex", flexDirection: "column", padding: 5 }}>
-                    <span>{text && typeof text === "string" && text.split(":")[0]}:</span>
-                    <span>{text && typeof text === "string" && getEvidenceNames(text.split(":")[1])}</span>
+                <div style={{
+                    border: "1px solid #00FF00",
+                    width: "80%",
+                    height: "100%",
+                    justifyContent: "center",
+                    alignItems: "flex-start",
+                    display: "flex",
+                    flexDirection: "column",
+                    padding: 5
+                }}>
+                    <span>{label}:</span>
+                    <span>{evidenceNodes}</span>
                 </div>
-
             </div>
-        )
+        );
     }
 };
 
