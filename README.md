@@ -35,6 +35,13 @@ This project uses Zustand to keep logic together and Jest for unit testing to ma
 	- Confirm all puzzles are reachable
 
 # Dev log:
+- 16/05/25
+	- Woke up to an email from a job I was very excited about, looks like there's still going to be a lot more time to make this
+	- Added first "real" evidence
+	- Added talking animation
+	- Fixed evidence update issue between evidence/document window and chat history
+	- Fixed word update issue between evidence/document and dictionary
+
 - 15/05/25
 	- Starting work on the alien today, got some blinking in place (TODO: get proper eyelids), next step is to look into talking animations for different emotions, as well as just the different emotions
 	- Day wasn't quite as productive as I would have liked, but the eyelids are sorted and I have the mouth movements ready to go

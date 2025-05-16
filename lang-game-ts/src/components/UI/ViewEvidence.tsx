@@ -63,9 +63,11 @@ const ViewEvidence = () => {
                     style={{
                         height: "70%",
                         overflowY: "auto",
+                        display: "flex",
+                       alignItems: "center"
                     }}
                 >
-                    <div className="missionPanelImage">
+                    <div className="">
                         <img
                             src={selectedEvidence.image}
                             style={{

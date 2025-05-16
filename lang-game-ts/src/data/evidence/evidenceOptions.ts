@@ -1,12 +1,12 @@
 import type { Evidence } from "../../types/index"
-import Evidence1Image from "/assets/images/alien/alien-content-noeyes.png"
+import Evidence1Image from "/assets/images/document/document-1.png"
 
 
 export const evidenceOptions: Evidence[] = [
     {
         id: 1,
         meaning: "Home",
-        text: [5],
+        text: [9, 5],
         image: Evidence1Image,
         orderFound: 0
     },
