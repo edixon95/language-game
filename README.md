@@ -35,6 +35,12 @@ This project uses Zustand to keep logic together and Jest for unit testing to ma
 	- Confirm all puzzles are reachable
 
 # Dev log:
+- 18/05/25
+	- Work asked me to do some extra hours, not complaining, but haven't had much time to work on this
+	- Put chat options in to state
+	- Add "isSeen" bool to chat options
+	- Reflect isSeen on UI so it's a bit easier to navigate
+
 - 16/05/25
 	- Woke up to an email from a job I was very excited about, looks like there's still going to be a lot more time to make this
 	- Added first "real" evidence
