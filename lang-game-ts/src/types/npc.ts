@@ -18,4 +18,5 @@ export interface DialogueOption {
     text: number[];
     nextNode?: number; // DialogueNodeId
     canShow?: boolean;
+    isSeen?: boolean;
 }

@@ -15,8 +15,9 @@ interface GameState {
     currentNPCState?: {
         dialogueId: number;
         dialogueNode: DialogueNode;
-        wordsToSay: number;
+        wordsToSay?: number;
     };
+    dialogueList: DialogueOption[];
     options?: DialogueOption[];
     chatHistory?: Message[];
     lastHistoryUpdate: string | undefined;
@@ -89,6 +90,7 @@ export const useGameStore = create<GameState>((set, get) => ({
     evidenceList: [],
     puzzleList: [],
     currentNPCState: undefined,
+    dialogueList: [],
     chatHistory: [],
     lastHistoryUpdate: new Date().toISOString(),
     wordState: {
@@ -126,7 +128,8 @@ export const useGameStore = create<GameState>((set, get) => ({
         set({
             wordList: initializedWords,
             evidenceList: initializedEvidence,
-            puzzleList: initializedPuzzles
+            puzzleList: initializedPuzzles,
+            dialogueList: dialogueOptions
         });
     },
 
@@ -136,7 +139,8 @@ export const useGameStore = create<GameState>((set, get) => ({
 
         const updatedWordList = updateWordListWithFoundWords(get().wordList, startNode.text);
 
-        const optionsToDisplay = dialogueOptions.filter(option =>
+        const dialogueList = get().dialogueList
+        const optionsToDisplay = dialogueList.filter(option =>
             startNode.choices.includes(option.id) &&
             areWordsFoundForOptions(updatedWordList, option.text)
         );
@@ -164,13 +168,18 @@ export const useGameStore = create<GameState>((set, get) => ({
     },
 
     selectNextInteraction: (nodeId, optionId) => {
-        const selectedOption = dialogueOptions.find((x) => x.id === optionId)
+        const dialogueList = get().dialogueList
+        const selectedOption = dialogueList.find((x) => x.id === optionId);
+        const selectedOptionIndex = dialogueList.findIndex((x) => x.id === optionId);
+        dialogueList[selectedOptionIndex].isSeen = true;
+
+        console.log(selectedOption)
         const nextNode = dialogueText.find((x) => x.id === nodeId);
         if (!nextNode || !selectedOption) return;
 
         const updatedWordList = updateWordListWithFoundWords(get().wordList, nextNode.text);
 
-        const optionsToDisplay = dialogueOptions.filter(option =>
+        const optionsToDisplay = dialogueList.filter(option =>
             nextNode.choices.includes(option.id) &&
             areWordsFoundForOptions(updatedWordList, option.text)
         );
@@ -197,7 +206,8 @@ export const useGameStore = create<GameState>((set, get) => ({
                 chatHistory: newHistory,
                 options: [],
                 currentNPCState: undefined,
-                lastHistoryUpdate: new Date().toISOString()
+                lastHistoryUpdate: new Date().toISOString(),
+                dialogueList: dialogueList
             };
         });
 
@@ -259,8 +269,8 @@ export const useGameStore = create<GameState>((set, get) => ({
     createOptions: () => {
         const { currentNPCState, wordList } = get();
         if (!currentNPCState?.dialogueNode.choices) return;
-
-        const filteredOptions = dialogueOptions.filter(option =>
+        const dialogueList = get().dialogueList
+        const filteredOptions = dialogueList.filter(option =>
             currentNPCState.dialogueNode.choices.includes(option.id) &&
             option.text.every(wordId =>
                 wordList.find(w => w.id === wordId)?.isFound
@@ -334,8 +344,9 @@ export const useGameStore = create<GameState>((set, get) => ({
         const currentNode = dialogueText.find((x) => x.id === get().currentNPCState?.dialogueId);
 
         let optionsToDisplay = get().options
+        const dialogueList = get().dialogueList
         if (currentNode) {
-            optionsToDisplay = dialogueOptions.filter(option =>
+            optionsToDisplay = dialogueList.filter(option =>
                 currentNode.choices.includes(option.id) &&
                 areWordsFoundForOptions(updatedWordList, option.text)
             );
