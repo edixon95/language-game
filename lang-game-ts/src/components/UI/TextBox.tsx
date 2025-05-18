@@ -6,6 +6,7 @@ export const TextBox = () => {
     const currentNPCState = useGameStore((s) => s.currentNPCState);
     const options = useGameStore((s) => s.options);
     const selectOption = useGameStore((s) => s.selectOption);
+    console.log(options)
 
     return (
         <div style={{ display: "flex", flexDirection: "row", alignItems: "center", width: "100%", justifyContent: "space-between", paddingLeft: 10, paddingRight: 10, paddingTop: 10, paddingBottom: 10 }}>
@@ -43,6 +44,14 @@ export const TextBox = () => {
                             <img src={ConfirmIcon} style={{ width: 20, height: 20, cursor: "pointer", position: "absolute", right: 10, top: "40%" }}
                                 onClick={() => selectOption(index)}
                             />
+                            <div style={{
+                                border: "1px solid #00ff00",
+                                backgroundColor: !op.isSeen ? "#00ff00" : "transparent",
+                                height: 15,
+                                width: 15,
+                                position: "absolute",
+                                left: 5
+                            }} />
                         </div>
                     ))
                 }
